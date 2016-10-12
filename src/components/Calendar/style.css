@@ -1,0 +1,38 @@
+ul{
+  list-style-type: none;
+  display: block;
+}
+.days > li{
+  cursor: pointer;
+  border: 1px dashed #e1e1e1;
+  line-height: 10px;
+  padding: 10px;
+}
+.days > li:nth-child(7n+1){
+  clear: left;
+}
+.weekday,
+.month{
+  border-top: 1px solid #c2c2c2;
+  border-left: 1px solid #c2c2c2;
+  border-bottom: 1px solid #c2c2c2;
+  background-color: #ececec;
+  line-height: 10px;
+  margin-bottom:2px;
+  padding: 10px;
+  text-align: center;
+}
+.weekday:last-child{
+  border-right: 1px solid #c2c2c2;
+}
+.weekday:first-child{
+  clear: left;
+}
+.month:first-child{
+  cursor: pointer;
+  clear: left;
+}
+.month:last-child{
+  cursor: pointer;
+  border-right: 1px solid #c2c2c2;
+}
