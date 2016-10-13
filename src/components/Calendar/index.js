@@ -42,7 +42,7 @@ class Calendar extends Component{
         </ul>
         <ul className="days col-md-12">
           {daysInMonthArray.map(function(day, index){
-            return <Day dayNumber={day} key={index}/>
+            return <Day year={year} month={month} dayNumber={day} key={index} index={index}/>
           })}
         </ul>
       </div>

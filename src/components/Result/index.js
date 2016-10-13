@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
+import {getformattedDate} from '../../dateHelper'
 
 class Result extends Component{
   render(){
@@ -12,6 +13,9 @@ class Result extends Component{
       account,
       pricerate,
       billableHours,
+      reportedVABDays,
+      reportedSicknessDays,
+      reportedVacationDays,
     } = this.props
     const total = pricerate * billableHours
     return(
@@ -41,6 +45,15 @@ class Result extends Component{
                 <td colSpan="1">{pricerate}</td>
                 <td colSpan="1">{total}</td>
               </tr>
+              {reportedVABDays.length > 0 ?
+                <tr>
+                  <th>VAB</th>
+                </tr> :
+                <tr/>
+              }
+              {reportedVABDays.map(function(day, index){
+                return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+              })}
             </tbody>
           </table>
         </div>
@@ -53,6 +66,9 @@ export default connect(state =>({
   formattedStartDate: state.calendar.formattedStartDate,
   formattedEndDate: state.calendar.formattedEndDate,
   billableHours: state.calendar.billableHours,
+  reportedVABDays: state.calendar.reportedVABDays,
+  reportedSicknessDays: state.calendar.reportedSicknessDays,
+  reportedVacationDays: state.calendar.reportedVacationDays,
   colleague: state.info.colleague,
   customer: state.info.customer,
   account: state.info.account,

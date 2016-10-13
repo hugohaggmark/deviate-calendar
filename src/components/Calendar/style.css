@@ -2,13 +2,13 @@ ul{
   list-style-type: none;
   display: block;
 }
-.days > li{
+.days > div > li{
   cursor: pointer;
   border: 1px dashed #e1e1e1;
   line-height: 10px;
   padding: 10px;
 }
-.days > li:nth-child(7n+1){
+.days > div:nth-child(7n+1){
   clear: left;
 }
 .weekday,
