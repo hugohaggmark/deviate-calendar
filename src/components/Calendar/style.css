@@ -2,15 +2,20 @@ ul{
   list-style-type: none;
   display: block;
 }
-.days > div > li{
+
+.work-day,
+.other-month-day,
+.days > li{
+  /*border: 1px dashed #e1e1e1;*/
+  line-height: 20px;
+  padding: 5px;
   cursor: pointer;
-  border: 1px dashed #e1e1e1;
-  line-height: 10px;
-  padding: 10px;
 }
-.days > div:nth-child(7n+1){
+.days > li:nth-child(7n+1){
   clear: left;
 }
+
+
 .weekday,
 .month{
   border-top: 1px solid #c2c2c2;

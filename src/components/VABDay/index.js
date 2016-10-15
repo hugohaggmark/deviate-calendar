@@ -1,0 +1,22 @@
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import './style.css'
+
+class VABDay extends Component{
+  render(){
+    const {value, index, clearVAB} = this.props;
+    return (
+      <li id={'day-' + index} className="col-sm-1 vab-day">
+        <div className="col-sm-12">
+          <span className="label label-primary">VAB  <span onClick={() => clearVAB(value)} className="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
+        </div>
+      </li>
+    )
+  }
+}
+
+export default connect(state =>({
+}), dispatch => ({
+  clearVAB: (date) => {dispatch({type:'REMOVE_VAB', payload:{date: date}})
+  },
+}))(VABDay)

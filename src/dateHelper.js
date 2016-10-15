@@ -15,6 +15,15 @@ export const formatDate = (year, month, day) => {
 
   return [stringYear, stringMonth, stringDay].join('-');
 }
-export const getformattedDate = (date) => {
+export const getformattedDate = date => {
   return formatDate(date.getFullYear(), date.getMonth(), date.getDate())
+}
+export const isWeekEnd = date => {
+  return date.getDay() === 0 || date.getDay() === 6
+}
+export const isDateInArray = (date, array) => {
+  return array.map(Number).indexOf(+date) >= 0
+}
+export const removeDateFromArray = (date, array) => {
+  return array.filter(d => +d !== +date)
 }
