@@ -47,6 +47,6 @@ export default connect(state => ({
   colleagueChanged: event => dispatch({type:'COLLEAGUE_CHANGED', payload: {colleague:event.target.value} }),
   customerChanged: event => dispatch({type:'CUSTOMER_CHANGED', payload: {customer:event.target.value} }),
   accountChanged: event => dispatch({type:'ACCOUNT_CHANGED', payload: {account:event.target.value} }),
-  pricerateChanged: event => dispatch({type:'PRICERATE_CHANGED', payload: {pricerate:parseInt(event.target.value)}}),
-  workHoursChanged: event => dispatch({type:'WORKHOURS_CHANGED', payload: {workHours:parseInt(event.target.value)}}),
+  pricerateChanged: event => dispatch({type:'PRICERATE_CHANGED', payload: {pricerate:parseInt(event.target.value, 10)}}),
+  workHoursChanged: event => dispatch({type:'WORKHOURS_CHANGED', payload: {workHours:parseInt(event.target.value, 10)}}),
 }))(Info)

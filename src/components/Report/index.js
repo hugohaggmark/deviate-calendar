@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
-import {getformattedDate} from '../../dateHelper'
+import VABReport from '../VABReport'
 
 class Report extends Component{
   render(){
-
-    const {formattedStartDate,
+    const {
+      date,
+      formattedStartDate,
       formattedEndDate,
       colleague,
       customer,
@@ -45,15 +46,7 @@ class Report extends Component{
                 <td colSpan="1">{pricerate}</td>
                 <td colSpan="1">{total}</td>
               </tr>
-              {reportedVABDays.length > 0 ?
-                <tr>
-                  <th>VAB</th>
-                </tr> :
-                <tr/>
-              }
-              {reportedVABDays.map(function(day, index){
-                return <tr key={index}><td>{getformattedDate(day)}</td></tr>
-              })}
+              <VABReport values={reportedVABDays} year={date.getFullYear()} month={date.getMonth()}/>
             </tbody>
           </table>
         </div>
@@ -63,6 +56,7 @@ class Report extends Component{
 }
 
 export default connect(state =>({
+  date: state.calendar.date,
   formattedStartDate: state.calendar.formattedStartDate,
   formattedEndDate: state.calendar.formattedEndDate,
   billableHours: state.calendar.billableHours,

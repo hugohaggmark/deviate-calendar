@@ -9,7 +9,14 @@ import InfoReducer from './reducers/info'
 import App from './App';
 import './index.css';
 
-const middleware = applyMiddleware(createLogger())
+const logger = store => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
+
+const middleware = applyMiddleware(logger, createLogger())
 const reducer = combineReducers({
   calendar: CalendarReducer,
   info: InfoReducer,
