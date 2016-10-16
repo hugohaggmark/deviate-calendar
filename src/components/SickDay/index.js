@@ -7,9 +7,7 @@ class SickDay extends Component{
     const {value, index, clearSickness} = this.props;
     return (
       <li id={'day-' + index} className="col-sm-1 sick-day">
-        <div className="col-sm-12">
-          <span className="label label-info">Sjuk  <span onClick={() => clearSickness(value)} className="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
-        </div>
+        <span onClick={() => clearSickness(value)}>Sjuk</span>
       </li>
     )
   }

@@ -18,7 +18,7 @@ class WorkDay extends Component{
             <li className="dropdown-header">Avvikelser</li>
             <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
             <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
-            <li><a href="#" onClick={() => reportVacation(value)}>Semester</a></li>
+            <li><a href="#" onClick={() => reportVacation(value)}>Ledig</a></li>
           </ul>
         </div>
       </li>

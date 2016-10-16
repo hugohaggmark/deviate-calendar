@@ -7,9 +7,7 @@ class VABDay extends Component{
     const {value, index, clearVAB} = this.props;
     return (
       <li id={'day-' + index} className="col-sm-1 vab-day">
-        <div className="col-sm-12">
-          <span className="label label-primary">VAB  <span onClick={() => clearVAB(value)} className="glyphicon glyphicon-remove" aria-hidden="true"></span></span>
-        </div>
+        <span onClick={() => clearVAB(value)}>VAB</span>
       </li>
     )
   }

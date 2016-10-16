@@ -19,7 +19,7 @@ class Calendar extends Component{
       <div className="row">
         <ul className="months col-md-12">
           <PreviousMonth/>
-          <li className="col-sm-5 month">{months[month]} - {year}</li>
+          <li className="col-xs-8 col-sm-5 month">{months[month]} - {year}</li>
           <NextMonth/>
         </ul>
         <ul className="weekdays col-md-12">

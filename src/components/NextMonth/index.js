@@ -8,7 +8,7 @@ class NextMonth extends Component{
     const year = date.getFullYear()
     const nextMonth = new Date(year, month + 1, 1)
     return(
-      <li className="col-sm-1 month" onClick={() => addMonth(nextMonth)}>&gt;</li>
+      <li className="col-xs-2 col-sm-1 month" onClick={() => addMonth(nextMonth)}>&gt;</li>
     )
   }
 }

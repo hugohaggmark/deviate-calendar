@@ -1,13 +1,5 @@
 .vab-day{
-  text-align: center;
-  background-color: #337ab7;
-}
-.vab-label{
-  position: relative;
-  left: 20px;
-  bottom: -9px;
-}
-
-.dropdown-menu {
-    position: relative;
+  background-color: #7986cb;
+  font-size: 80%;
+  color: #ffffff;
 }

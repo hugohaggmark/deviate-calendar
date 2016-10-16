@@ -2,42 +2,55 @@ ul{
   list-style-type: none;
   display: block;
 }
-
-.work-day,
-.other-month-day,
 .days > li{
-  /*border: 1px dashed #e1e1e1;*/
+  text-align: center;
   line-height: 20px;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
+  border-bottom: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
 }
 .days > li:nth-child(7n+1){
   clear: left;
+  border-left: 1px solid #c2c2c2;
 }
-
-
 .weekday,
 .month{
   border-top: 1px solid #c2c2c2;
-  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
   border-bottom: 1px solid #c2c2c2;
   background-color: #ececec;
   line-height: 10px;
-  margin-bottom:2px;
   padding: 10px;
   text-align: center;
-}
-.weekday:last-child{
-  border-right: 1px solid #c2c2c2;
-}
-.weekday:first-child{
-  clear: left;
 }
 .month:first-child{
   cursor: pointer;
   clear: left;
+  border-left: 1px solid #c2c2c2;
 }
 .month:last-child{
   cursor: pointer;
-  border-right: 1px solid #c2c2c2;
+}
+.weekday:first-child{
+  clear: left;
+  border-left: 1px solid #c2c2c2;
+}
+ul.weekdays{
+  margin-bottom: 0px;
+}
+@media (max-width: 767px){
+  ul.days{
+    margin-top: 20px;
+  }
+  .other-month-day{
+    display: none;
+  }
+  .days > li{
+    border-left: 1px solid #c2c2c2;
+    border-right: 1px solid #c2c2c2;
+  }
+  .dropdown-menu{
+    left: 27% !important;
+  }
 }
