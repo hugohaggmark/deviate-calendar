@@ -7,10 +7,13 @@ class Info extends Component{
       customer,
       account,
       pricerate,
+      workHours,
       colleagueChanged,
       customerChanged,
       accountChanged,
-      pricerateChanged} = this.props
+      pricerateChanged,
+      workHoursChanged,
+    } = this.props
     return(
       <div className="row">
         <div className="form-group col-sm-4">
@@ -25,6 +28,10 @@ class Info extends Component{
           <label htmlFor="pricerate">Pris</label>
           <input type="text" defaultValue={pricerate} id="pricerate" className="form-control" onChange={pricerateChanged}/>
         </div>
+        <div className="form-group col-sm-1" style={{clear:"left"}}>
+          <label htmlFor="workHours">Arbetstid</label>
+          <input type="text" defaultValue={workHours} id="workHours" className="form-control" onChange={workHoursChanged}/>
+        </div>
       </div>
     )
   }
@@ -35,9 +42,11 @@ export default connect(state => ({
   customer: state.info.customer,
   account: state.info.account,
   pricerate: state.info.pricerate,
+  workHours: state.info.workHours,
 }), dispatch => ({
   colleagueChanged: event => dispatch({type:'COLLEAGUE_CHANGED', payload: {colleague:event.target.value} }),
   customerChanged: event => dispatch({type:'CUSTOMER_CHANGED', payload: {customer:event.target.value} }),
   accountChanged: event => dispatch({type:'ACCOUNT_CHANGED', payload: {account:event.target.value} }),
-  pricerateChanged: event => dispatch({type:'PRICERATE_CHANGED', payload: {pricerate:event.target.value} }),
+  pricerateChanged: event => dispatch({type:'PRICERATE_CHANGED', payload: {pricerate:parseInt(event.target.value)}}),
+  workHoursChanged: event => dispatch({type:'WORKHOURS_CHANGED', payload: {workHours:parseInt(event.target.value)}}),
 }))(Info)

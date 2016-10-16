@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import './style.css'
 import {getformattedDate} from '../../dateHelper'
 
-class Result extends Component{
+class Report extends Component{
   render(){
 
     const {formattedStartDate,
@@ -74,4 +74,4 @@ export default connect(state =>({
   account: state.info.account,
   pricerate: state.info.pricerate,
 }), dispatch => ({
-}))(Result)
+}))(Report)

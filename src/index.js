@@ -20,6 +20,7 @@ store.dispatch({ type:'COLLEAGUE_CHANGED', payload:{ colleague: 'Hugo Häggmark'
 store.dispatch({ type:'CUSTOMER_CHANGED', payload:{ customer: 'TUI Nordic' }})
 store.dispatch({ type:'ACCOUNT_CHANGED', payload:{ account: 'Team Customer' }})
 store.dispatch({ type:'PRICERATE_CHANGED', payload:{ pricerate: 900 }})
+store.dispatch({ type:'WORKHOURS_CHANGED', payload:{ workHours: 6 }})
 store.dispatch({type:'REPORT_VAB', payload:{date: new Date(2016, 9, 7)}})
 store.dispatch({type:'REPORT_SICKNESS', payload:{date: new Date(2016, 9, 14)}})
 store.dispatch({type:'REPORT_VACATION', payload:{date: new Date(2016, 9, 5)}})

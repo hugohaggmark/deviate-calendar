@@ -19,19 +19,13 @@ class WorkDay extends Component{
             <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
             <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
             <li><a href="#" onClick={() => reportVacation(value)}>Ledig</a></li>
+            {/* <li role="separator" className="divider"></li>
+              <li className="dropdown-header">Timmar +/-</li>
+              <li><a href="#" onClick={() => reportOverTime(value)}>+1</a></li>
+            <li><a href="#" onClick={() => reportShortTime(value)}>-1</a></li> */}
           </ul>
         </div>
       </li>
-
-      // <div className="dropdown">
-      //   <li id={'day-' + index} className="col-sm-1 work-day" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{this.pad(value.getDate())}</li>
-      //   <ul className="dropdown-menu" id={'dropdown-menu-' + index } aria-labelledby={'day-' + index}>
-      //     <li className="dropdown-header">Avvikelser</li>
-      //     <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
-      //     <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
-      //     <li><a href="#" onClick={() => reportVacation(value)}>Semester</a></li>
-      //   </ul>
-      // </div>
     )
   }
 }
@@ -46,5 +40,11 @@ export default connect(state =>({
   },
   reportVacation: (date) => {
     dispatch({type:'REPORT_VACATION', payload:{date: date}})
+  },
+  reportOverTime: (date) => {
+    dispatch({type:'REPORT_OVERTIME', payload:{date: date}})
+  },
+  reportShortTime: (date) => {
+    dispatch({type:'REPORT_SHORTTIME', payload:{date: date}})
   },
 }))(WorkDay)

@@ -5,7 +5,7 @@ import {getNumberOfDaysInMonth,
   removeDateFromArray,
 } from '../dateHelper'
 
-const getBillableHours = (date, reportedVABDays, reportedSicknessDays, reportedVacationDays) => {
+const getBillableHours = (date, workHours, reportedVABDays, reportedSicknessDays, reportedVacationDays) => {
   const month = date.getMonth()
   const year = date.getFullYear()
   var billableHours = 0
@@ -23,8 +23,7 @@ const getBillableHours = (date, reportedVABDays, reportedSicknessDays, reportedV
     if(isDateInArray(d, reportedVacationDays)){
       continue
     }
-
-    billableHours += 6
+    billableHours += workHours
   }
   return billableHours
 }
@@ -67,6 +66,33 @@ const getDaysInMonthArray = (date, reportedVABDays, reportedSicknessDays, report
   }
   return daysInMonthArray
 }
+const updateVABDays = (date, state, remove = false) => {
+  const newVABDaysArray = remove ? removeDateFromArray(date, state.reportedVABDays) : state.reportedVABDays.concat(date)
+  return {
+    ...state,
+    reportedVABDays: newVABDaysArray,
+    billableHours:getBillableHours(date, state.workHours, newVABDaysArray, state.reportedSicknessDays, state.reportedVacationDays),
+    daysInMonth: getDaysInMonthArray(date, newVABDaysArray, state.reportedSicknessDays, state.reportedVacationDays),
+  }
+}
+const updateSickDays = (date, state, remove = false) => {
+  const newSickDaysArray = remove ? removeDateFromArray(date, state.reportedSicknessDays) : state.reportedSicknessDays.concat(date)
+  return {
+    ...state,
+    reportedSicknessDays: newSickDaysArray,
+    billableHours:getBillableHours(date, state.workHours, state.reportedVABDays, newSickDaysArray, state.reportedVacationDays),
+    daysInMonth: getDaysInMonthArray(date, state.reportedVABDays, newSickDaysArray, state.reportedVacationDays),
+  }
+}
+const updateVacationDays = (date, state, remove = false) => {
+  const newVacationDaysArray = remove ? removeDateFromArray(date, state.reportedVacationDays) : state.reportedVacationDays.concat(date)
+  return {
+    ...state,
+    reportedVacationDays: newVacationDaysArray,
+    billableHours:getBillableHours(date, state.workHours, state.reportedVABDays, state.reportedSicknessDays, newVacationDaysArray),
+    daysInMonth: getDaysInMonthArray(date, state.reportedVABDays, state.reportedSicknessDays, newVacationDaysArray),
+  }
+}
 const initialState = {
   weekdays:['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'],
   months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
@@ -82,50 +108,25 @@ const CalendarReducer = (state = initialState, action = {}) => {
         numberOfDaysInMonth: getNumberOfDaysInMonth(action.payload.date),
         formattedStartDate: getFormattedStartDate(action.payload.date),
         formattedEndDate: getFormattedEndDate(action.payload.date),
-        billableHours:getBillableHours(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
+        billableHours:getBillableHours(action.payload.date, state.workHours, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
         daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
       }
     case 'REPORT_VAB':
-      const newVABDaysArray = state.reportedVABDays.concat(action.payload.date)
-      return {...state,
-        reportedVABDays: newVABDaysArray,
-        billableHours:getBillableHours(action.payload.date, newVABDaysArray, state.reportedSicknessDays, state.reportedVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, newVABDaysArray, state.reportedSicknessDays, state.reportedVacationDays),
-      }
+      return updateVABDays(action.payload.date, state)
     case 'REPORT_SICKNESS':
-      const newSicknessDaysArray = state.reportedSicknessDays.concat(action.payload.date)
-      return {...state,
-        reportedSicknessDays: newSicknessDaysArray,
-        billableHours:getBillableHours(action.payload.date, state.reportedVABDays, newSicknessDaysArray, state.reportedVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, newSicknessDaysArray, state.reportedVacationDays),
-      }
+    return updateSickDays(action.payload.date, state)
     case 'REPORT_VACATION':
-      const newVacationDays = state.reportedVacationDays.concat(action.payload.date)
-      return {...state,
-        reportedVacationDays: newVacationDays,
-        billableHours:getBillableHours(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, newVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, newVacationDays),
-      }
+    return updateVacationDays(action.payload.date, state)
     case 'REMOVE_VAB':
-      const removeVABDays = removeDateFromArray(action.payload.date, state.reportedVABDays)
-      return {...state,
-        reportedVABDays: removeVABDays,
-        billableHours:getBillableHours(action.payload.date, removeVABDays, state.reportedSicknessDays, state.reportedVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, removeVABDays, state.reportedSicknessDays, state.reportedVacationDays),
-      }
+      return updateVABDays(action.payload.date, state, true)
     case 'REMOVE_SICKNESS':
-      const removeSicknessDays = removeDateFromArray(action.payload.date, state.reportedSicknessDays)
-      return {...state,
-        reportedSicknessDays: removeSicknessDays,
-        billableHours:getBillableHours(action.payload.date, state.reportedVABDays, removeSicknessDays, state.reportedVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, removeSicknessDays, state.reportedVacationDays),
-      }
+      return updateSickDays(action.payload.date, state, true)
     case 'REMOVE_VACATION':
-      const removeVacationDays = removeDateFromArray(action.payload.date, state.reportedVacationDays)
+      return updateVacationDays(action.payload.date, state, true)
+    case 'WORKHOURS_CHANGED':
       return {...state,
-        reportedVacationDays: removeVacationDays,
-        billableHours:getBillableHours(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, removeVacationDays),
-        daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, removeVacationDays),
+        workHours: action.payload.workHours,
+        billableHours:getBillableHours(state.date, action.payload.workHours, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
       }
     default:
       return state

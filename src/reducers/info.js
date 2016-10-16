@@ -8,6 +8,8 @@ const InfoReducer = (state = {}, action = {}) => {
       return {...state, account: action.payload.account }
     case 'PRICERATE_CHANGED':
       return {...state, pricerate: action.payload.pricerate }
+    case 'WORKHOURS_CHANGED':
+      return {...state, workHours: action.payload.workHours }
     default:
       return state
   }

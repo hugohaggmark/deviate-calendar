@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Info from './components/Info'
 import Calendar from './components/Calendar'
-import Result from './components/Result'
+import Report from './components/Report'
 import './App.css'
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="container">
         <Info/>
         <Calendar />
-        <Result />
+        <Report />
       </div>
     )
   }
