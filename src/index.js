@@ -2,35 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import createLogger from 'redux-logger'
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import { combineReducers } from 'redux'
+import persistState from 'redux-localstorage'
 import CalendarReducer from './reducers/calendar'
 import InfoReducer from './reducers/info'
 import App from './App';
 import './index.css';
 
-const logger = store => next => action => {
-  console.log('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  return result
-}
-
-const middleware = applyMiddleware(logger, createLogger())
+const middleware = applyMiddleware(createLogger())
+const enhancer = compose(
+ middleware,
+ persistState(),
+)
 const reducer = combineReducers({
   calendar: CalendarReducer,
   info: InfoReducer,
 })
-const store = createStore(reducer, {}, middleware);
+const store = createStore(reducer, {}, enhancer);
 store.dispatch({ type:'INIT_DATES', payload:{ date: new Date() }})
-store.dispatch({ type:'COLLEAGUE_CHANGED', payload:{ colleague: 'Hugo Häggmark' }})
-store.dispatch({ type:'CUSTOMER_CHANGED', payload:{ customer: 'TUI Nordic' }})
-store.dispatch({ type:'ACCOUNT_CHANGED', payload:{ account: 'Team Customer' }})
-store.dispatch({ type:'PRICERATE_CHANGED', payload:{ pricerate: 900 }})
-store.dispatch({ type:'WORKHOURS_CHANGED', payload:{ workHours: 6 }})
-store.dispatch({type:'REPORT_VAB', payload:{date: new Date(2016, 9, 7)}})
-store.dispatch({type:'REPORT_SICKNESS', payload:{date: new Date(2016, 9, 14)}})
-store.dispatch({type:'REPORT_VACATION', payload:{date: new Date(2016, 9, 5)}})
 ReactDOM.render(
   <Provider store={store}>
     <App />

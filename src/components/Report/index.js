@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
-import VABReport from '../VABReport'
+import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../dateHelper'
 
 class Report extends Component{
   render(){
@@ -19,18 +19,24 @@ class Report extends Component{
       reportedVacationDays,
     } = this.props
     const total = pricerate * billableHours
+    const vabDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedVABDays)
+    const showVAB = vabDatesThisMonth.length > 0 ? true : false
+    const sicknessDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedSicknessDays)
+    const showSickness = sicknessDatesThisMonth.length > 0 ? true : false
+    const vacationDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedVacationDays)
+    const showVacation = vacationDatesThisMonth.length > 0 ? true : false
     return(
       <div className="row">
         <div className="table-responsive col-md-10">
           <table className="table table-borderless">
             <tbody>
               <tr>
-                <th colSpan="4">Kollega</th>
-                <th colSpan="3">Period</th>
+                <th colSpan="2">Kollega</th>
+                <th colSpan="2">Period</th>
               </tr>
               <tr>
-                <td colSpan="4">{colleague}</td>
-                <td colSpan="3">{formattedStartDate} -> {formattedEndDate}</td>
+                <td colSpan="2">{colleague}</td>
+                <td colSpan="2">{formattedStartDate} -> {formattedEndDate}</td>
               </tr>
               <tr>
                 <th colSpan="2">Kund</th>
@@ -46,7 +52,36 @@ class Report extends Component{
                 <td colSpan="1">{pricerate}</td>
                 <td colSpan="1">{total}</td>
               </tr>
-              <VABReport values={reportedVABDays} year={date.getFullYear()} month={date.getMonth()}/>
+              { showVAB &&
+                <tr>
+                  <th>VAB - totalt {vabDatesThisMonth.length} dag(ar)</th>
+                </tr>
+              }
+              { showVAB &&
+                vabDatesThisMonth.map(function(day, index) {
+                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                })
+              }
+              { showSickness &&
+                <tr>
+                  <th>Sjuk - totalt {sicknessDatesThisMonth.length} dag(ar)</th>
+                </tr>
+              }
+              { showSickness &&
+                sicknessDatesThisMonth.map(function(day, index) {
+                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                })
+              }
+              { showVacation &&
+                <tr>
+                  <th>Semester - totalt {vacationDatesThisMonth.length} dag(ar)</th>
+                </tr>
+              }
+              { showVacation &&
+                vacationDatesThisMonth.map(function(day, index) {
+                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                })
+              }
             </tbody>
           </table>
         </div>

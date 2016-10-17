@@ -16,14 +16,17 @@ export const formatDate = (year, month, day) => {
   return [stringYear, stringMonth, stringDay].join('-');
 }
 export const getformattedDate = date => {
-  return formatDate(date.getFullYear(), date.getMonth(), date.getDate())
+  return formatDate(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate())
 }
 export const isWeekEnd = date => {
   return date.getDay() === 0 || date.getDay() === 6
 }
 export const isDateInArray = (date, array) => {
-  return array.map(Number).indexOf(+date) >= 0
+  return array.filter(d => getformattedDate(d) === getformattedDate(date)).length > 0
 }
 export const removeDateFromArray = (date, array) => {
-  return array.filter(d => +d !== +date)
+  return array.filter(d => getformattedDate(d) !== getformattedDate(date))
+}
+export const getDatesInArrayForThisYearMonth = (year, month, array) => {
+  return array.filter(day => new Date(day).getFullYear() === year && new Date(day).getMonth() === month)
 }

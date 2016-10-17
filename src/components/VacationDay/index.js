@@ -7,7 +7,7 @@ class VacationDay extends Component{
     const {value, index, clearVacation} = this.props;
     return (
       <li id={'day-' + index} className="col-sm-1 vacay-day">
-        <span onClick={() => clearVacation(value)}>Ledig</span>
+        <span onClick={() => clearVacation(value)}>Semester</span>
       </li>
     )
   }
