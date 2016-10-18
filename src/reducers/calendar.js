@@ -96,6 +96,9 @@ const updateVacationDays = (date, state, remove = false) => {
 const initialState = {
   weekdays:['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'],
   months: ['Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'],
+  reportedVABDays: [],
+  reportedSicknessDays: [],
+  reportedVacationDays: [],
 }
 const CalendarReducer = (state = initialState, action = {}) => {
   switch (action.type) {
