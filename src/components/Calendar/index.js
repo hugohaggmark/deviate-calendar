@@ -4,7 +4,8 @@ import VABDay from '../VABDay'
 import SickDay from '../SickDay'
 import VacationDay from '../VacationDay'
 import WeekendDay from '../WeekendDay'
-import WorkDay from '../WorkDay'
+import ClickableDay from '../ClickableDay'
+import SwipeableDay from '../SwipeableDay'
 import OtherMonthDay from '../OtherMonthDay'
 import NextMonth from '../NextMonth'
 import PreviousMonth from '../PreviousMonth'
@@ -27,7 +28,25 @@ class Calendar extends Component{
             return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
           })}
         </ul>
-        <ul className="days col-md-12">
+        <ul className="days visible-xs col-md-12">
+          {daysInMonth.map(function(day, index){
+            switch (day.type) {
+              case 'weekend':
+                return <WeekendDay value={day.payload} key={index} index={index}/>
+              case 'vab':
+                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="1"/>
+              case 'sickness':
+                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="2"/>
+              case 'vacation':
+                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="3"/>
+              case 'workday':
+                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="0"/>
+              default:
+                return <OtherMonthDay key={index} index={index}/>
+            }
+          })}
+        </ul>
+        <ul className="days hidden-xs col-md-12">
           {daysInMonth.map(function(day, index){
             switch (day.type) {
               case 'weekend':
@@ -39,7 +58,7 @@ class Calendar extends Component{
               case 'vacation':
                 return <VacationDay value={day.payload} key={index} index={index}/>
               case 'workday':
-                return <WorkDay value={day.payload} key={index} index={index}/>
+                return <ClickableDay value={day.payload} key={index} index={index}/>
               default:
                 return <OtherMonthDay key={index} index={index}/>
             }

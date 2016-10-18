@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
 
-class WorkDay extends Component{
+class ClickableDay extends Component{
   pad = (n) => {
     return (n < 10) ? ("0" + n) : n;
   }
@@ -47,4 +47,4 @@ export default connect(state =>({
   reportShortTime: (date) => {
     dispatch({type:'REPORT_SHORTTIME', payload:{date: date}})
   },
-}))(WorkDay)
+}))(ClickableDay)
