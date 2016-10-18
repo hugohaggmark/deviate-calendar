@@ -8,6 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <a href="#" className="btn btn-default" onClick={() => localStorage.removeItem('redux')}>Clear state...</a>
         <Info/>
         <Calendar />
         <Report />
