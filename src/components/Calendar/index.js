@@ -28,19 +28,19 @@ class Calendar extends Component{
             return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
           })}
         </ul>
-        <ul className="days visible-xs col-md-12">
+        <ul className="days display-xs col-md-12">
           {daysInMonth.map(function(day, index){
             switch (day.type) {
               case 'weekend':
                 return <WeekendDay value={day.payload} key={index} index={index}/>
               case 'vab':
-                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="1"/>
+                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="1"/>
               case 'sickness':
-                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="2"/>
+                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="2"/>
               case 'vacation':
-                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="3"/>
+                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="3"/>
               case 'workday':
-                return <SwipeableDay value={day.payload} key={index} index={index} swipeStartIndex="0"/>
+                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="0"/>
               default:
                 return <OtherMonthDay key={index} index={index}/>
             }

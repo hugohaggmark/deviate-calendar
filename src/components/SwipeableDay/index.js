@@ -41,7 +41,6 @@ class SwipeableDay extends Component{
   }
   render(){
     const {value,
-      index,
       reportVAB,
       reportSickness,
       reportVacation,
@@ -60,7 +59,7 @@ class SwipeableDay extends Component{
       clearVacation: clearVacation,
     }
     return (
-      <li className={this.getClassName(startSlide)} key={index}>
+      <li className={this.getClassName(startSlide)}>
         <ReactSwipe className="carousel" swipeOptions={
           {
             continuous: true,
@@ -68,7 +67,7 @@ class SwipeableDay extends Component{
             disableScroll: true,
             stopPropagation: true,
             callback: (index, elem) => this.reportDeviation(index, config)
-          }}>
+          }} key={startSlide}>
           <div><span>{this.pad(value.getDate())}</span></div>
           <div><span>VAB</span></div>
           <div><span>Sjuk</span></div>
