@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 
 class NextMonth extends Component{
   render(){
@@ -15,6 +16,6 @@ class NextMonth extends Component{
 
 export default connect( state => ({
   date: state.calendar.date
-}), dispatch => ({ addMonth: (nextDate) => dispatch({type:'INIT_DATES', payload: { date: nextDate }})
-
+}), dispatch => ({
+  addMonth: nextDate => dispatch(actions.loadDatesAction(nextDate))
 }))(NextMonth)

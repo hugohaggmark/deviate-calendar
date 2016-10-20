@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../../dateHelper'
 import './style.css'
-import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../dateHelper'
 
 class Report extends Component{
   render(){

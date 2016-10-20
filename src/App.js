@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Calendar } from './Calendar'
 import { Info } from './Information'
-import Report from './components/Report'
+import { Report } from './Reporting'
 import './App.css'
 
 class App extends Component {
