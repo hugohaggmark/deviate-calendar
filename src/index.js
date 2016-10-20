@@ -5,10 +5,11 @@ import createLogger from 'redux-logger'
 import { compose, createStore, applyMiddleware } from 'redux'
 import { combineReducers } from 'redux'
 import persistState from 'redux-localstorage'
-import CalendarReducer from './reducers/calendar'
-import InfoReducer from './reducers/info'
+import { reducer as CalendarReducer } from './Calendar'
+import { reducer as InformationReducer } from './Information'
 import App from './App';
-import './index.css';
+import { actions as calendarActions } from './Calendar'
+import './index.css'
 
 const middleware = applyMiddleware(createLogger())
 const enhancer = compose(
@@ -17,10 +18,10 @@ const enhancer = compose(
 )
 const reducer = combineReducers({
   calendar: CalendarReducer,
-  info: InfoReducer,
+  info: InformationReducer,
 })
 const store = createStore(reducer, {}, enhancer);
-store.dispatch({ type:'INIT_DATES', payload:{ date: new Date() }})
+store.dispatch(calendarActions.loadDatesAction(new Date()))
 ReactDOM.render(
   <Provider store={store}>
     <App />

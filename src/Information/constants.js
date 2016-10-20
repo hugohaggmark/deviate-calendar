@@ -1,0 +1,5 @@
+export const COLLEAGUE_CHANGED  = 'deviate-calendar/Information/COLLEAGUE_CHANGED'
+export const CUSTOMER_CHANGED   = 'deviate-calendar/Information/CUSTOMER_CHANGED'
+export const ACCOUNT_CHANGED    = 'deviate-calendar/Information/ACCOUNT_CHANGED'
+export const PRICERATE_CHANGED  = 'deviate-calendar/Information/PRICERATE_CHANGED'
+export const WORKHOURS_CHANGED  = 'deviate-calendar/Information/WORKHOURS_CHANGED'

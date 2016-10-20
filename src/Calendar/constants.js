@@ -1,0 +1,7 @@
+export const LOAD_DATES       = 'deviate-calendar/Calendar/LOAD_DATES'
+export const REPORT_VAB       = 'deviate-calendar/Calendar/REPORT_VAB'
+export const REPORT_SICKNESS  = 'deviate-calendar/Calendar/REPORT_SICKNESS'
+export const REPORT_VACATION  = 'deviate-calendar/Calendar/REPORT_VACATION'
+export const CLEAR_VAB       = 'deviate-calendar/Calendar/CLEAR_VAB'
+export const CLEAR_SICKNESS  = 'deviate-calendar/Calendar/CLEAR_SICKNESS'
+export const CLEAR_VACATION  = 'deviate-calendar/Calendar/CLEAR_VACATION'

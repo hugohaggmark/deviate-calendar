@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 import './style.css'
 
 class VacationDay extends Component{
@@ -15,6 +16,5 @@ class VacationDay extends Component{
 
 export default connect(state =>({
 }), dispatch => ({
-  clearVacation: (date) => {dispatch({type:'REMOVE_VACATION', payload:{date: date}})
-  },
+  clearVacation: date => dispatch(actions.clearVacationAction(date))
 }))(VacationDay)

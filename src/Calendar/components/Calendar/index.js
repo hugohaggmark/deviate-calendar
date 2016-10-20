@@ -28,7 +28,7 @@ class Calendar extends Component{
             return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
           })}
         </ul>
-        <ul className="days display-xs col-md-12">
+        <ul className="days visible-xs col-md-12">
           {daysInMonth.map(function(day, index){
             switch (day.type) {
               case 'weekend':

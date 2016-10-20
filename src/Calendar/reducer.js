@@ -4,6 +4,8 @@ import {getNumberOfDaysInMonth,
   isDateInArray,
   removeDateFromArray,
 } from '../dateHelper'
+import * as types from './constants'
+import { constants as informationTypes } from '../Information'
 
 const getBillableHours = (date, workHours, reportedVABDays, reportedSicknessDays, reportedVacationDays) => {
   const month = date.getMonth()
@@ -102,7 +104,7 @@ const initialState = {
 }
 const CalendarReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case 'INIT_DATES':
+    case types.LOAD_DATES:
       return {...state,
         date: action.payload.date,
         numberOfDaysInMonth: getNumberOfDaysInMonth(action.payload.date),
@@ -111,19 +113,19 @@ const CalendarReducer = (state = initialState, action = {}) => {
         billableHours:getBillableHours(action.payload.date, state.workHours, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
         daysInMonth: getDaysInMonthArray(action.payload.date, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),
       }
-    case 'REPORT_VAB':
+    case types.REPORT_VAB:
       return updateVABDays(action.payload.date, state)
-    case 'REPORT_SICKNESS':
+    case types.REPORT_SICKNESS:
     return updateSickDays(action.payload.date, state)
-    case 'REPORT_VACATION':
+    case types.REPORT_VACATION:
     return updateVacationDays(action.payload.date, state)
-    case 'REMOVE_VAB':
+    case types.CLEAR_VAB:
       return updateVABDays(action.payload.date, state, true)
-    case 'REMOVE_SICKNESS':
+    case types.CLEAR_SICKNESS:
       return updateSickDays(action.payload.date, state, true)
-    case 'REMOVE_VACATION':
+    case types.CLEAR_VACATION:
       return updateVacationDays(action.payload.date, state, true)
-    case 'WORKHOURS_CHANGED':
+    case informationTypes.WORKHOURS_CHANGED:
       return {...state,
         workHours: action.payload.workHours,
         billableHours:getBillableHours(state.date, action.payload.workHours, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays),

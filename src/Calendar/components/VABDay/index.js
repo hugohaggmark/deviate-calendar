@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 import './style.css'
 
 class VABDay extends Component{
@@ -15,6 +16,5 @@ class VABDay extends Component{
 
 export default connect(state =>({
 }), dispatch => ({
-  clearVAB: (date) => {dispatch({type:'REMOVE_VAB', payload:{date: date}})
-  },
+  clearVAB: date => dispatch(actions.clearVABAction(date))
 }))(VABDay)

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 
 class Info extends Component{
   render(){
@@ -44,9 +45,9 @@ export default connect(state => ({
   pricerate: state.info.pricerate,
   workHours: state.info.workHours,
 }), dispatch => ({
-  colleagueChanged: event => dispatch({type:'COLLEAGUE_CHANGED', payload: {colleague:event.target.value} }),
-  customerChanged: event => dispatch({type:'CUSTOMER_CHANGED', payload: {customer:event.target.value} }),
-  accountChanged: event => dispatch({type:'ACCOUNT_CHANGED', payload: {account:event.target.value} }),
-  pricerateChanged: event => dispatch({type:'PRICERATE_CHANGED', payload: {pricerate:parseInt(event.target.value, 10)}}),
-  workHoursChanged: event => dispatch({type:'WORKHOURS_CHANGED', payload: {workHours:parseInt(event.target.value, 10)}}),
+  colleagueChanged: event => dispatch(actions.colleagueChangedAction(event.target.value)),
+  customerChanged: event => dispatch(actions.customerChangedAction(event.target.value)),
+  accountChanged: event => dispatch(actions.accountChangedAction(event.target.value)),
+  pricerateChanged: event => dispatch(actions.pricerateChangedAction(parseInt(event.target.value, 10))),
+  workHoursChanged: event => dispatch(actions.workHoursChangedAction(parseInt(event.target.value, 10))),
 }))(Info)

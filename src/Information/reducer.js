@@ -1,18 +1,20 @@
-const InfoReducer = (state = {}, action = {}) => {
+import * as types from './constants'
+
+const InformationReducer = (state = {}, action = {}) => {
   switch (action.type) {
-    case 'COLLEAGUE_CHANGED':
+    case types.COLLEAGUE_CHANGED:
       return {...state, colleague: action.payload.colleague }
-    case 'CUSTOMER_CHANGED':
+    case types.CUSTOMER_CHANGED:
       return {...state, customer: action.payload.customer }
-    case 'ACCOUNT_CHANGED':
+    case types.ACCOUNT_CHANGED:
       return {...state, account: action.payload.account }
-    case 'PRICERATE_CHANGED':
+    case types.PRICERATE_CHANGED:
       return {...state, pricerate: action.payload.pricerate }
-    case 'WORKHOURS_CHANGED':
+    case types.WORKHOURS_CHANGED:
       return {...state, workHours: action.payload.workHours }
     default:
       return state
   }
 }
 
-export default InfoReducer
+export default InformationReducer

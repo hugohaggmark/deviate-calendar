@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import ReactSwipe from 'react-swipe';
 import './style.css'
+import * as actions from '../../actions'
 
 class SwipeableDay extends Component{
   pad = (n) => {
@@ -80,28 +81,10 @@ class SwipeableDay extends Component{
 
 export default connect(state =>({
 }), dispatch => ({
-  reportVAB: (date) => {
-    dispatch({type:'REPORT_VAB', payload:{date: date}})
-  },
-  clearVAB: (date) => {
-    dispatch({type:'REMOVE_VAB', payload:{date: date}})
-  },
-  reportSickness: (date) => {
-    dispatch({type:'REPORT_SICKNESS', payload:{date: date}})
-  },
-  clearSickness: (date) => {
-    dispatch({type:'REMOVE_SICKNESS', payload:{date: date}})
-  },
-  reportVacation: (date) => {
-    dispatch({type:'REPORT_VACATION', payload:{date: date}})
-  },
-  clearVacation: (date) => {
-    dispatch({type:'REMOVE_VACATION', payload:{date: date}})
-  },
-  reportOverTime: (date) => {
-    dispatch({type:'REPORT_OVERTIME', payload:{date: date}})
-  },
-  reportShortTime: (date) => {
-    dispatch({type:'REPORT_SHORTTIME', payload:{date: date}})
-  },
+  reportVAB: date => dispatch(actions.reportVABAction(date)),
+  reportSickness: date => dispatch(actions.reportSicknessAction(date)),
+  reportVacation: date => dispatch(actions.reportVacationAction(date)),
+  clearVAB: date => dispatch(actions.clearVABAction(date)),
+  clearSickness: date => dispatch(actions.clearSicknessAction(date)),
+  clearVacation: date => dispatch(actions.clearVacationAction(date)),
 }))(SwipeableDay)

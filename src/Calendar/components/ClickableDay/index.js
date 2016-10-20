@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import './style.css'
+import * as actions from '../../actions'
 
 class ClickableDay extends Component{
   pad = (n) => {
@@ -19,10 +20,6 @@ class ClickableDay extends Component{
             <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
             <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
             <li><a href="#" onClick={() => reportVacation(value)}>Semester</a></li>
-            {/* <li role="separator" className="divider"></li>
-              <li className="dropdown-header">Timmar +/-</li>
-              <li><a href="#" onClick={() => reportOverTime(value)}>+1</a></li>
-            <li><a href="#" onClick={() => reportShortTime(value)}>-1</a></li> */}
           </ul>
         </div>
       </li>
@@ -32,19 +29,7 @@ class ClickableDay extends Component{
 
 export default connect(state =>({
 }), dispatch => ({
-  reportVAB: (date) => {
-    dispatch({type:'REPORT_VAB', payload:{date: date}})
-  },
-  reportSickness: (date) => {
-    dispatch({type:'REPORT_SICKNESS', payload:{date: date}})
-  },
-  reportVacation: (date) => {
-    dispatch({type:'REPORT_VACATION', payload:{date: date}})
-  },
-  reportOverTime: (date) => {
-    dispatch({type:'REPORT_OVERTIME', payload:{date: date}})
-  },
-  reportShortTime: (date) => {
-    dispatch({type:'REPORT_SHORTTIME', payload:{date: date}})
-  },
+  reportVAB: date => dispatch(actions.reportVABAction(date)),
+  reportSickness: date => dispatch(actions.reportSicknessAction(date)),
+  reportVacation: date => dispatch(actions.reportVacationAction(date)),
 }))(ClickableDay)

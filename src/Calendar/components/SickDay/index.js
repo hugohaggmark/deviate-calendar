@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 import './style.css'
 
 class SickDay extends Component{
@@ -15,6 +16,5 @@ class SickDay extends Component{
 
 export default connect(state =>({
 }), dispatch => ({
-  clearSickness: (date) => {dispatch({type:'REMOVE_SICKNESS', payload:{date: date}})
-  },
+  clearSickness: date => dispatch(actions.clearSicknessAction(date))
 }))(SickDay)

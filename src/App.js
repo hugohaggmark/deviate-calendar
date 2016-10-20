@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Info from './components/Info'
-import Calendar from './components/Calendar'
+import { Calendar } from './Calendar'
+import { Info } from './Information'
 import Report from './components/Report'
 import './App.css'
 
