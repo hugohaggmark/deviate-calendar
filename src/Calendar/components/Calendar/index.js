@@ -7,6 +7,7 @@ import WeekendDay from '../WeekendDay'
 import ClickableDay from '../ClickableDay'
 import SwipeableDay from '../SwipeableDay'
 import OtherMonthDay from '../OtherMonthDay'
+import AptitudDay from '../AptitudDay'
 import NextMonth from '../NextMonth'
 import PreviousMonth from '../PreviousMonth'
 import './style.css'
@@ -39,6 +40,8 @@ class Calendar extends Component{
                 return <SwipeableDay value={day.payload} key={index} swipeStartIndex="2"/>
               case 'vacation':
                 return <SwipeableDay value={day.payload} key={index} swipeStartIndex="3"/>
+              case 'aptitud':
+                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="4"/>
               case 'workday':
                 return <SwipeableDay value={day.payload} key={index} swipeStartIndex="0"/>
               default:
@@ -57,6 +60,8 @@ class Calendar extends Component{
                 return <SickDay value={day.payload} key={index} index={index}/>
               case 'vacation':
                 return <VacationDay value={day.payload} key={index} index={index}/>
+              case 'aptitud':
+                return <AptitudDay value={day.payload} key={index} index={index}/>
               case 'workday':
                 return <ClickableDay value={day.payload} key={index} index={index}/>
               default:

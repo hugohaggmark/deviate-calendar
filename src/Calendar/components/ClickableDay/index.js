@@ -8,7 +8,13 @@ class ClickableDay extends Component{
     return (n < 10) ? ("0" + n) : n;
   }
   render(){
-    const {value, index, reportVAB, reportSickness, reportVacation} = this.props;
+    const {value,
+      index,
+      reportVAB,
+      reportSickness,
+      reportVacation,
+      reportAptitudDay,
+    } = this.props;
     return (
       <li className="col-sm-1 work-day">
         <div className="dropdown col-sm-12">
@@ -20,6 +26,7 @@ class ClickableDay extends Component{
             <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
             <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
             <li><a href="#" onClick={() => reportVacation(value)}>Semester</a></li>
+            <li><a href="#" onClick={() => reportAptitudDay(value)}>Aptitud</a></li>
           </ul>
         </div>
       </li>
@@ -32,4 +39,5 @@ export default connect(state =>({
   reportVAB: date => dispatch(actions.reportVABAction(date)),
   reportSickness: date => dispatch(actions.reportSicknessAction(date)),
   reportVacation: date => dispatch(actions.reportVacationAction(date)),
+  reportAptitudDay: date => dispatch(actions.reportAptitudDayAction(date)),
 }))(ClickableDay)

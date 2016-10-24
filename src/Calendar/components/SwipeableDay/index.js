@@ -21,11 +21,16 @@ class SwipeableDay extends Component{
       break;
       case 3:
         config.clearSickness(config.value)
+        config.clearAptitudDay(config.value)
         config.reportVacation(config.value)
+      break;
+      case 4:
+        config.clearVacation(config.value)
+        config.reportAptitudDay(config.value)
       break;
       default:
         config.clearVAB(config.value)
-        config.clearVacation(config.value)
+        config.clearAptitudDay(config.value)
     }
   }
   getClassName = index => {
@@ -36,6 +41,8 @@ class SwipeableDay extends Component{
         return "col-sm-1 sick-day"
       case 3:
         return "col-sm-1 vacay-day"
+      case 4:
+        return "col-sm-1 aptitud-day"
       default:
         return "col-sm-1 work-day"
     }
@@ -45,9 +52,11 @@ class SwipeableDay extends Component{
       reportVAB,
       reportSickness,
       reportVacation,
+      reportAptitudDay,
       clearVAB,
       clearSickness,
       clearVacation,
+      clearAptitudDay,
       swipeStartIndex} = this.props;
     const startSlide = parseInt(swipeStartIndex, 10)
     const config = {
@@ -55,9 +64,11 @@ class SwipeableDay extends Component{
       reportVAB: reportVAB,
       reportSickness: reportSickness,
       reportVacation: reportVacation,
+      reportAptitudDay: reportAptitudDay,
       clearVAB: clearVAB,
       clearSickness: clearSickness,
       clearVacation: clearVacation,
+      clearAptitudDay: clearAptitudDay,
     }
     return (
       <li className={this.getClassName(startSlide)}>
@@ -73,6 +84,7 @@ class SwipeableDay extends Component{
           <div><span>VAB</span></div>
           <div><span>Sjuk</span></div>
           <div><span>Semester</span></div>
+          <div><span>Aptitud</span></div>
         </ReactSwipe>
       </li>
     )
@@ -84,7 +96,9 @@ export default connect(state =>({
   reportVAB: date => dispatch(actions.reportVABAction(date)),
   reportSickness: date => dispatch(actions.reportSicknessAction(date)),
   reportVacation: date => dispatch(actions.reportVacationAction(date)),
+  reportAptitudDay: date => dispatch(actions.reportAptitudDayAction(date)),
   clearVAB: date => dispatch(actions.clearVABAction(date)),
   clearSickness: date => dispatch(actions.clearSicknessAction(date)),
   clearVacation: date => dispatch(actions.clearVacationAction(date)),
+  clearAptitudDay: date => dispatch(actions.clearAptitudDayAction(date)),
 }))(SwipeableDay)
