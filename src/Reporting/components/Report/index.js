@@ -4,6 +4,14 @@ import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../../dateHe
 import './style.css'
 
 class Report extends Component{
+  sendMonthMail = () => {
+    const preHtml = "<html><head></head><body>"
+    const postHtml = "</body></html>"
+    const tableHtml = document.getElementById('report').outerHTML
+    const html = encodeURIComponent(preHtml + tableHtml + postHtml)
+    //console.log(html);
+     window.open("mailto:?subject=Tidrapport&body=" + tableHtml)
+  }
   render(){
     const {
       date,
@@ -26,64 +34,71 @@ class Report extends Component{
     const vacationDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedVacationDays)
     const showVacation = vacationDatesThisMonth.length > 0 ? true : false
     return(
-      <div className="row">
-        <div className="table-responsive col-md-10">
-          <table className="table table-borderless">
-            <tbody>
-              <tr>
-                <th colSpan="2">Kollega</th>
-                <th colSpan="2">Period</th>
-              </tr>
-              <tr>
-                <td colSpan="2">{colleague}</td>
-                <td colSpan="2">{formattedStartDate} -> {formattedEndDate}</td>
-              </tr>
-              <tr>
-                <th colSpan="2">Kund</th>
-                <th colSpan="2">Konto</th>
-                <th colSpan="1">Timmar</th>
-                <th colSpan="1">Pris</th>
-                <th colSpan="1">Summa</th>
-              </tr>
-              <tr>
-                <td colSpan="2">{customer}</td>
-                <td colSpan="2">{account}</td>
-                <td colSpan="1">{billableHours}</td>
-                <td colSpan="1">{pricerate}</td>
-                <td colSpan="1">{total}</td>
-              </tr>
-              { showVAB &&
+      <div>
+        <div className="row">
+          <div className="col-md-10">
+            <a href="#" className="btn btn-primary" onClick={() => this.sendMonthMail()}>Send month report...</a>
+          </div>
+        </div>
+        <div className="row">
+          <div id="report" className="table-responsive col-md-10">
+            <table className="table table-borderless">
+              <tbody>
                 <tr>
-                  <th>VAB - totalt {vabDatesThisMonth.length} dag(ar)</th>
+                  <th colSpan="2">Kollega</th>
+                  <th colSpan="2">Period</th>
                 </tr>
-              }
-              { showVAB &&
-                vabDatesThisMonth.map(function(day, index) {
-                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
-                })
-              }
-              { showSickness &&
                 <tr>
-                  <th>Sjuk - totalt {sicknessDatesThisMonth.length} dag(ar)</th>
+                  <td colSpan="2">{colleague}</td>
+                  <td colSpan="2">{formattedStartDate} -> {formattedEndDate}</td>
                 </tr>
-              }
-              { showSickness &&
-                sicknessDatesThisMonth.map(function(day, index) {
-                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
-                })
-              }
-              { showVacation &&
                 <tr>
-                  <th>Semester - totalt {vacationDatesThisMonth.length} dag(ar)</th>
+                  <th colSpan="2">Kund</th>
+                  <th colSpan="2">Konto</th>
+                  <th colSpan="1">Timmar</th>
+                  <th colSpan="1">Pris</th>
+                  <th colSpan="1">Summa</th>
                 </tr>
-              }
-              { showVacation &&
-                vacationDatesThisMonth.map(function(day, index) {
-                  return <tr key={index}><td>{getformattedDate(day)}</td></tr>
-                })
-              }
-            </tbody>
-          </table>
+                <tr>
+                  <td colSpan="2">{customer}</td>
+                  <td colSpan="2">{account}</td>
+                  <td colSpan="1">{billableHours}</td>
+                  <td colSpan="1">{pricerate}</td>
+                  <td colSpan="1">{total}</td>
+                </tr>
+                { showVAB &&
+                  <tr>
+                    <th>VAB - totalt {vabDatesThisMonth.length} dag(ar)</th>
+                  </tr>
+                }
+                { showVAB &&
+                  vabDatesThisMonth.map(function(day, index) {
+                    return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                  })
+                }
+                { showSickness &&
+                  <tr>
+                    <th>Sjuk - totalt {sicknessDatesThisMonth.length} dag(ar)</th>
+                  </tr>
+                }
+                { showSickness &&
+                  sicknessDatesThisMonth.map(function(day, index) {
+                    return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                  })
+                }
+                { showVacation &&
+                  <tr>
+                    <th>Semester - totalt {vacationDatesThisMonth.length} dag(ar)</th>
+                  </tr>
+                }
+                { showVacation &&
+                  vacationDatesThisMonth.map(function(day, index) {
+                    return <tr key={index}><td>{getformattedDate(day)}</td></tr>
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     )
