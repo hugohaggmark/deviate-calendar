@@ -84,7 +84,7 @@ class SwipeableDay extends Component{
           <div><span>VAB</span></div>
           <div><span>Sjuk</span></div>
           <div><span>Semester</span></div>
-          <div><span>Aptitud</span></div>
+          <div><span>.</span></div>
         </ReactSwipe>
       </li>
     )
