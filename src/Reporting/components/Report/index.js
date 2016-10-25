@@ -83,7 +83,7 @@ class Report extends Component{
       <div>
         <div className="row">
           <div className="col-md-10">
-            <a href="#" className="btn btn-primary" onClick={() => this.sendMonthMail(date,
+            <a href="#" className="btn btn-primary hidden-xs" onClick={() => this.sendMonthMail(date,
               formattedStartDate,
               formattedEndDate,
               colleague,
