@@ -4,13 +4,59 @@ import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../../dateHe
 import './style.css'
 
 class Report extends Component{
-  sendMonthMail = () => {
-    const preHtml = "<html><head></head><body>"
-    const postHtml = "</body></html>"
-    const tableHtml = document.getElementById('report').outerHTML
-    const html = encodeURIComponent(preHtml + tableHtml + postHtml)
-    //console.log(html);
-     window.open("mailto:?subject=Tidrapport&body=" + tableHtml)
+  sendMonthMail = (
+    date,
+    formattedStartDate,
+    formattedEndDate,
+    colleague,
+    customer,
+    account,
+    pricerate,
+    billableHours,
+    reportedVABDays,
+    reportedSicknessDays,
+    reportedVacationDays) => {
+    const rows = []
+    rows[0] = "<strong>Kollega</strong>&#09;&#09;<strong>Period</strong>"
+    rows[rows.length] = `${colleague}&#09;${formattedStartDate} -> ${formattedEndDate}`
+    rows[rows.length] = ""
+    rows[rows.length] = "<strong>Kund</strong>&#09;&#09;<strong>Konto</strong>&#09;&#09;<strong>Timmar</strong>&#09;<strong>Pris</strong>&#09;<strong>Summa</strong>"
+    rows[rows.length] = `${customer}&#09;&#09;${account}&#09;${billableHours}&#09;${pricerate}&#09;${billableHours * pricerate}`
+    rows[rows.length] = ""
+    const vabDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedVABDays)
+    const showVAB = vabDatesThisMonth.length > 0 ? true : false
+    const sicknessDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedSicknessDays)
+    const showSickness = sicknessDatesThisMonth.length > 0 ? true : false
+    const vacationDatesThisMonth = getDatesInArrayForThisYearMonth(date.getFullYear(), date.getMonth(), reportedVacationDays)
+    const showVacation = vacationDatesThisMonth.length > 0 ? true : false
+    if(showVAB){
+      rows[rows.length] = `<strong>VAB - totalt ${vabDatesThisMonth.length} dag(ar)</strong>`
+      vabDatesThisMonth.map((day, index) =>{
+        rows[rows.length] = `${getformattedDate(day)}`
+      })
+      rows[rows.length] = ""
+    }
+    if(showSickness){
+      rows[rows.length] = `<strong>Sjuk - totalt ${sicknessDatesThisMonth.length} dag(ar)</strong>`
+      sicknessDatesThisMonth.map((day, index) =>{
+        rows[rows.length] = `${getformattedDate(day)}`
+      })
+      rows[rows.length] = ""
+    }
+    if(showVacation){
+      rows[rows.length] = `<strong>Semester - totalt ${vacationDatesThisMonth.length} dag(ar)</strong>`
+      vacationDatesThisMonth.map((day, index) =>{
+        rows[rows.length] = `${getformattedDate(day)}`
+      })
+      rows[rows.length] = ""
+    }
+    let html = ""
+    for (var i = 0; i < rows.length; i++) {
+      html += encodeURIComponent(rows[i] + "<br/>")
+    }
+
+    html += "<br/>"
+    window.location = "mailto:?subject=Tidrapport&body=" + html
   }
   render(){
     const {
@@ -37,7 +83,18 @@ class Report extends Component{
       <div>
         <div className="row">
           <div className="col-md-10">
-            <a href="#" className="btn btn-primary" onClick={() => this.sendMonthMail()}>Send month report...</a>
+            <a href="#" className="btn btn-primary" onClick={() => this.sendMonthMail(date,
+              formattedStartDate,
+              formattedEndDate,
+              colleague,
+              customer,
+              account,
+              pricerate,
+              billableHours,
+              reportedVABDays,
+              reportedSicknessDays,
+              reportedVacationDays,
+            )}>Send month report...</a>
           </div>
         </div>
         <div className="row">
