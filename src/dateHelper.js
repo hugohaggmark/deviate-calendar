@@ -42,3 +42,102 @@ export const getDatesInArrayForThisYearMonth = (year, month, array) => {
 
   return array.filter(day => new Date(day).getFullYear() === year && new Date(day).getMonth() === month)
 }
+export const getFillerDaysBeforeThisMonth = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const firstDayInMonth = new Date(year, month, 1)
+  const dayInWeek = firstDayInMonth.getDay()
+  const fillerDates = []
+  let count = 0
+  switch (dayInWeek) {
+    case 1:
+      count = -1
+    break
+    case 2:
+      count = 0
+    break
+    case 3:
+      count = 1
+    break
+    case 4:
+      count = 2
+    break
+    case 5:
+      count = 3
+    break
+    case 6:
+      count = 4
+    break
+    default:
+      count = 5
+  }
+  const daysPreviousMonth = getNumberOfDaysInMonth(new Date(year, month - 1,1))
+  for (var i = daysPreviousMonth - count; i <= daysPreviousMonth; i++) {
+    var day = new Date(year, month - 1, i)
+    if(isWeekEnd(day)){
+      fillerDates.push({ type: 'other-month-weekend', payload:day})
+    } else {
+      fillerDates.push({ type: 'other-month-day', payload:day})
+    }
+  }
+
+  return fillerDates
+}
+export const getFillerDaysAfterThisMonth = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const numberOfDaysInMonth = getNumberOfDaysInMonth(date)
+  const dayInWeek = new Date(year, month, numberOfDaysInMonth).getDay()
+  const fillerDates = []
+  for (var counter = 1; counter <= 7 - dayInWeek; counter++) {
+    let day = new Date(year, month, numberOfDaysInMonth)
+    day.setDate(day.getDate() + counter)
+    if(isWeekEnd(day)){
+      fillerDates.push({ type: 'other-month-weekend', payload:day})
+    } else {
+      fillerDates.push({ type: 'other-month-day', payload:day})
+    }
+  }
+
+  return fillerDates
+}
+export const getDaysInMonthArray = state => {
+  const date = state.date
+  const reportedVABDays = state.reportedVABDays
+  const reportedSicknessDays = state.reportedSicknessDays
+  const reportedVacationDays = state.reportedVacationDays
+  const aptitudDays = state.aptitudDays
+  const month = date.getMonth()
+  const year = date.getFullYear()
+  const numberOfDaysInMonth = getNumberOfDaysInMonth(date)
+  const firstDayInMonth = new Date(year, month, 1).getDay()
+  const lastDayInMonth = new Date(year, month, numberOfDaysInMonth).getDay() - 1
+  let daysInMonthArray = []
+  const fillerDatesBefore = getFillerDaysBeforeThisMonth(date)
+  const fillerDatesAfter = getFillerDaysAfterThisMonth(date)
+
+  daysInMonthArray = daysInMonthArray.concat(fillerDatesBefore)
+  for (var i = 1; i <= numberOfDaysInMonth; i++) {
+    var day = new Date(year, month, i)
+    if(isWeekEnd(day)){
+      daysInMonthArray.push({ type: 'weekend', payload:day})
+    }
+    else if(isDateInArray(day, reportedVABDays)){
+      daysInMonthArray.push({ type: 'vab', payload: day})
+    }
+    else if(isDateInArray(day, reportedSicknessDays)){
+      daysInMonthArray.push({ type: 'sickness', payload: day})
+    }
+    else if(isDateInArray(day, reportedVacationDays)){
+      daysInMonthArray.push({ type: 'vacation', payload: day})
+    }
+    else if(isDateInArray(day, aptitudDays)){
+      daysInMonthArray.push({ type: 'aptitud', payload: day})
+    }
+    else{
+      daysInMonthArray.push({ type: 'workday', payload: day})
+    }
+  }
+  daysInMonthArray = daysInMonthArray.concat(fillerDatesAfter)
+  return daysInMonthArray
+}

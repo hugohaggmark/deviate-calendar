@@ -3,3 +3,8 @@
   background-color: ghostwhite;
   cursor: default !important;
 }
+.other-month-weekend{
+  text-align: center;
+  background-color: #d9edf7;
+  cursor: default !important;
+}

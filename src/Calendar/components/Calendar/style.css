@@ -43,7 +43,8 @@ ul.weekdays{
   ul.days{
     margin-top: 20px;
   }
-  .other-month-day{
+  .other-month-day,
+  .other-month-weekend {
     display: none;
   }
   .days > li{

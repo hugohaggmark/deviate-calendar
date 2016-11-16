@@ -45,7 +45,7 @@ class Calendar extends Component{
               case 'workday':
                 return <SwipeableDay value={day.payload} key={index} swipeStartIndex="0"/>
               default:
-                return <OtherMonthDay key={index} index={index}/>
+                return <OtherMonthDay key={index} index={index} type={day.type} value={day.payload}/>
             }
           })}
         </ul>
@@ -65,7 +65,7 @@ class Calendar extends Component{
               case 'workday':
                 return <ClickableDay value={day.payload} key={index} index={index}/>
               default:
-                return <OtherMonthDay key={index} index={index}/>
+                return <OtherMonthDay key={index} index={index} type={day.type} value={day.payload}/>
             }
           })}
         </ul>
