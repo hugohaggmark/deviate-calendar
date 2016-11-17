@@ -39,77 +39,25 @@ const getFormattedStartDate = date => {
 const getFormattedEndDate = date => {
   return formatDate(date.getFullYear(), date.getMonth(), getNumberOfDaysInMonth(date))
 }
-const updateVABDays = (date, state, remove = false) => {
-  const newVABDaysArray = remove ? removeDateFromArray(date, state.reportedVABDays) : state.reportedVABDays.concat(date)
-  const newVABState = {
-    date: date,
-    reportedVABDays: newVABDaysArray,
-    reportedSicknessDays: state.reportedSicknessDays,
-    reportedVacationDays: state.reportedVacationDays,
-    aptitudDays: state.aptitudDays,
-  }
-  return {
-    ...state,
-    reportedVABDays: newVABDaysArray,
-    billableHours:getBillableHours(date, state.workHours, newVABDaysArray, state.reportedSicknessDays, state.reportedVacationDays, state.aptitudDays),
-    daysInMonth: getDaysInMonthArray(newVABState),
-  }
-}
-const updateSickDays = (date, state, remove = false) => {
-  const newSickDaysArray = remove ? removeDateFromArray(date, state.reportedSicknessDays) : state.reportedSicknessDays.concat(date)
-  const newSickDaysState = {
-    date: date,
-    reportedVABDays: state.reportedVABDays,
-    reportedSicknessDays: newSickDaysArray,
-    reportedVacationDays: state.reportedVacationDays,
-    aptitudDays: state.aptitudDays,
-  }
-  return {
-    ...state,
-    reportedSicknessDays: newSickDaysArray,
-    billableHours:getBillableHours(date, state.workHours, state.reportedVABDays, newSickDaysArray, state.reportedVacationDays, state.aptitudDays),
-    daysInMonth: getDaysInMonthArray(newSickDaysState),
-  }
-}
-const updateVacationDays = (date, state, remove = false) => {
-  const newVacationDaysArray = remove ? removeDateFromArray(date, state.reportedVacationDays) : state.reportedVacationDays.concat(date)
-  const newVacationState = {
-    date: date,
-    reportedVABDays: state.reportedVABDays,
-    reportedSicknessDays: state.reportedSicknessDays,
-    reportedVacationDays: newVacationDaysArray,
-    aptitudDays: state.aptitudDays,
-  }
-  return {
-    ...state,
-    reportedVacationDays: newVacationDaysArray,
-    billableHours:getBillableHours(date, state.workHours, state.reportedVABDays, state.reportedSicknessDays, newVacationDaysArray, state.aptitudDays),
-    daysInMonth: getDaysInMonthArray(newVacationState),
-  }
-}
-const updateAptitudDays = (date, state, remove = false) => {
-  if(!state || !state.aptitudDays)
-  {
-    return {
-      ...state,
-      aptitudDays: [date],
-    }
+export const updateDateForArrayProperty = (date, state, property, remove = false) => {
+  const newState = {...state}
+  if(state[property]) {
+    const newArray = remove ? removeDateFromArray(date, state[property]) : state[property].concat(date)
+    newState[property] = newArray
+  } else {
+    newState[property] = [date]
   }
 
-  const newAptitudDaysArray = remove ? removeDateFromArray(date, state.aptitudDays) : state.aptitudDays.concat(date)
-  const newAptitudDaysState = {
-    date: date,
-    reportedVABDays: state.reportedVABDays,
-    reportedSicknessDays: state.reportedSicknessDays,
-    reportedVacationDays: state.reportedVacationDays,
-    aptitudDays: newAptitudDaysArray,
-  }
-  return {
-    ...state,
-    aptitudDays: newAptitudDaysArray,
-    billableHours:getBillableHours(date, state.workHours, state.reportedVABDays, state.reportedSicknessDays, state.reportedVacationDays, newAptitudDaysArray),
-    daysInMonth: getDaysInMonthArray(newAptitudDaysState),
-  }
+  newState.date = date
+  newState.billableHours = getBillableHours(date,
+    newState.workHours,
+    newState.reportedVABDays,
+    newState.reportedSicknessDays,
+    newState.reportedVacationDays,
+    newState.aptitudDays)
+  newState.daysInMonth = getDaysInMonthArray(newState)
+
+  return {...newState}
 }
 const initialState = {
   weekdays:['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön'],
@@ -119,6 +67,7 @@ const initialState = {
   reportedVacationDays: [],
   holidays: [],
   aptitudDays: [],
+  workHours: 0,
 }
 const CalendarReducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -139,21 +88,21 @@ const CalendarReducer = (state = initialState, action = {}) => {
         daysInMonth: getDaysInMonthArray(newState),
       }
     case types.REPORT_VAB:
-      return updateVABDays(action.payload.date, state)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedVABDays')
     case types.REPORT_SICKNESS:
-    return updateSickDays(action.payload.date, state)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedSicknessDays')
     case types.REPORT_VACATION:
-    return updateVacationDays(action.payload.date, state)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedVacationDays')
     case types.CLEAR_VAB:
-      return updateVABDays(action.payload.date, state, true)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedVABDays', true)
     case types.CLEAR_SICKNESS:
-      return updateSickDays(action.payload.date, state, true)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedSicknessDays', true)
     case types.CLEAR_VACATION:
-      return updateVacationDays(action.payload.date, state, true)
+      return updateDateForArrayProperty(action.payload.date, state, 'reportedVacationDays', true)
     case types.REPORT_APTITUDDAY:
-      return updateAptitudDays(action.payload.date, state)
+      return updateDateForArrayProperty(action.payload.date, state, 'aptitudDays')
     case types.CLEAR_APTITUDDAY:
-      return updateAptitudDays(action.payload.date, state, true)
+      return updateDateForArrayProperty(action.payload.date, state, 'aptitudDays', true)
     case informationTypes.WORKHOURS_CHANGED:
       return {...state,
         workHours: action.payload.workHours,

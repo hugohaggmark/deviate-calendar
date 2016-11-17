@@ -1,6 +1,7 @@
 import should from 'should'
 import { reducer as CalendarReducer } from '../Calendar'
 import { constants as types } from '../Calendar'
+import { updateDateForArrayProperty } from '../Calendar/reducer'
 
 describe('Calendar Reducer', () => {
   describe('Aptitud related days', () => {
@@ -21,6 +22,35 @@ describe('Calendar Reducer', () => {
           {aptitudDays:[date]}
           , {type: types.CLEAR_APTITUDDAY, payload:{date:date}})
           state.aptitudDays.length.should.be.exactly(0)
+      })
+    })
+  })
+  describe('updateDateForArrayProperty', () => {
+    describe('Adding an array property to an initial state', () => {
+      it('should contain the new property', () => {
+        const state = CalendarReducer()
+        const date = new Date(2016, 0, 1)
+        const newState = updateDateForArrayProperty(date, state, 'kalle')
+        newState.kalle.length.should.be.exactly(1)
+        newState.kalle[0].getDate().should.be.eql(date.getDate())
+      })
+    })
+    describe('Adding a value to an existing array', () => {
+      it('should contain the new value', () => {
+        const state = CalendarReducer()
+        const date = new Date(2016, 0, 1)
+        const newState = updateDateForArrayProperty(date, state, 'reportedVABDays')
+        newState.reportedVABDays.length.should.be.exactly(1)
+        newState.reportedVABDays[0].getDate().should.be.eql(date.getDate())
+      })
+    })
+    describe('Removing a value from an existing array', () => {
+      it('should contain the new value', () => {
+        const state = CalendarReducer()
+        const date = new Date(2016, 0, 1)
+        let newState = updateDateForArrayProperty(date, state, 'reportedVABDays')
+        newState = updateDateForArrayProperty(date, newState, 'reportedVABDays', true)
+        newState.reportedVABDays.length.should.be.exactly(0)
       })
     })
   })
@@ -71,6 +101,11 @@ describe('Calendar Reducer', () => {
     it('should contain Aptitud related days', () => {
       const state = CalendarReducer()
       should.exist(state.aptitudDays)
+    })
+    it('should contain workHours', () => {
+      const state = CalendarReducer()
+      should.exist(state.workHours)
+      state.workHours.should.be.exactly(0)
     })
   })
 })

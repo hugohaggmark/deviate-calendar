@@ -110,8 +110,6 @@ export const getDaysInMonthArray = state => {
   const month = date.getMonth()
   const year = date.getFullYear()
   const numberOfDaysInMonth = getNumberOfDaysInMonth(date)
-  const firstDayInMonth = new Date(year, month, 1).getDay()
-  const lastDayInMonth = new Date(year, month, numberOfDaysInMonth).getDay() - 1
   let daysInMonthArray = []
   const fillerDatesBefore = getFillerDaysBeforeThisMonth(date)
   const fillerDatesAfter = getFillerDaysAfterThisMonth(date)
