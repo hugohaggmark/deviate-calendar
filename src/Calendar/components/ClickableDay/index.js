@@ -10,10 +10,8 @@ class ClickableDay extends Component{
   render(){
     const {value,
       index,
-      reportVAB,
-      reportSickness,
-      reportVacation,
-      reportAptitudDay,
+      reportDeviation,
+      deviations,
     } = this.props;
     return (
       <li className="col-sm-1 work-day">
@@ -23,10 +21,10 @@ class ClickableDay extends Component{
           </span>
           <ul className="dropdown-menu" id={'dropdown-menu-' + index } aria-labelledby={'day-' + index}>
             <li className="dropdown-header">Avvikelser</li>
-            <li><a href="#" onClick={() => reportVAB(value)}>VAB</a></li>
-            <li><a href="#" onClick={() => reportSickness(value)}>Sjuk</a></li>
-            <li><a href="#" onClick={() => reportVacation(value)}>Semester</a></li>
-            <li><a href="#" onClick={() => reportAptitudDay(value)}>Aptitud</a></li>
+            {deviations &&
+              deviations.map(function(deviation, index){
+                return <li key={index}><a href="#" onClick={() => reportDeviation(value, deviation.type)}>{deviation.label}</a></li>
+            })}
           </ul>
         </div>
       </li>
@@ -35,9 +33,7 @@ class ClickableDay extends Component{
 }
 
 export default connect(state =>({
+  deviations: state.calendar.deviations
 }), dispatch => ({
-  reportVAB: date => dispatch(actions.reportVABAction(date)),
-  reportSickness: date => dispatch(actions.reportSicknessAction(date)),
-  reportVacation: date => dispatch(actions.reportVacationAction(date)),
-  reportAptitudDay: date => dispatch(actions.reportAptitudDayAction(date)),
+  reportDeviation: (date, type) => dispatch(actions.reportDeviation(date, type))
 }))(ClickableDay)

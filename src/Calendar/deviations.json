@@ -1,0 +1,31 @@
+{
+  "deviations": [ {
+    "type": "vab-day",
+    "label": "VAB",
+    "showInReport": true
+  }, {
+    "type": "parental-leave-day",
+    "label": "Föräldraledig",
+    "showInReport": true
+  }, {
+    "type": "sick-day",
+    "label": "Sjuk",
+    "showInReport": true
+  }, {
+    "type": "aptitud-day",
+    "label": "Aptitud",
+    "showInReport": false
+  }, {
+    "type": "vacay-day",
+    "label": "Semester",
+    "showInReport": true
+  }, {
+    "type": "holiday-day",
+    "label": "Helgdag",
+    "showInReport": false
+  }, {
+    "type": "other-day",
+    "label": "Annat",
+    "showInReport": false
+  } ]
+}

@@ -75,9 +75,9 @@ export const getFillerDaysBeforeThisMonth = date => {
   for (var i = daysPreviousMonth - count; i <= daysPreviousMonth; i++) {
     var day = new Date(year, month - 1, i)
     if(isWeekEnd(day)){
-      fillerDates.push({ type: 'other-month-weekend', payload:day})
+      fillerDates.push({ type: 'other-month-weekend', date:day})
     } else {
-      fillerDates.push({ type: 'other-month-day', payload:day})
+      fillerDates.push({ type: 'other-month-day', date:day})
     }
   }
 
@@ -93,9 +93,9 @@ export const getFillerDaysAfterThisMonth = date => {
     let day = new Date(year, month, numberOfDaysInMonth)
     day.setDate(day.getDate() + counter)
     if(isWeekEnd(day)){
-      fillerDates.push({ type: 'other-month-weekend', payload:day})
+      fillerDates.push({ type: 'other-month-weekend', date:day})
     } else {
-      fillerDates.push({ type: 'other-month-day', payload:day})
+      fillerDates.push({ type: 'other-month-day', date:day})
     }
   }
 
@@ -103,10 +103,6 @@ export const getFillerDaysAfterThisMonth = date => {
 }
 export const getDaysInMonthArray = state => {
   const date = state.date
-  const reportedVABDays = state.reportedVABDays
-  const reportedSicknessDays = state.reportedSicknessDays
-  const reportedVacationDays = state.reportedVacationDays
-  const aptitudDays = state.aptitudDays
   const month = date.getMonth()
   const year = date.getFullYear()
   const numberOfDaysInMonth = getNumberOfDaysInMonth(date)
@@ -115,25 +111,29 @@ export const getDaysInMonthArray = state => {
   const fillerDatesAfter = getFillerDaysAfterThisMonth(date)
 
   daysInMonthArray = daysInMonthArray.concat(fillerDatesBefore)
-  for (var i = 1; i <= numberOfDaysInMonth; i++) {
-    var day = new Date(year, month, i)
-    if(isWeekEnd(day)){
-      daysInMonthArray.push({ type: 'weekend', payload:day})
+  for (let i = 1; i <= numberOfDaysInMonth; i++) {
+    let day = new Date(year, month, i)
+    let alreadyAdded = false
+    if(state.deviations){
+      let j = 0
+      while(alreadyAdded === false && j < state.deviations.length) {
+        let property = state.deviations[j].type
+        let label = state.deviations[j].label
+        let array = state[property]
+        if(array && isDateInArray(day, array)){
+          daysInMonthArray.push({ type: property, label: label, date: day})
+          alreadyAdded = true
+        }
+        j++
+      }      
     }
-    else if(isDateInArray(day, reportedVABDays)){
-      daysInMonthArray.push({ type: 'vab', payload: day})
-    }
-    else if(isDateInArray(day, reportedSicknessDays)){
-      daysInMonthArray.push({ type: 'sickness', payload: day})
-    }
-    else if(isDateInArray(day, reportedVacationDays)){
-      daysInMonthArray.push({ type: 'vacation', payload: day})
-    }
-    else if(isDateInArray(day, aptitudDays)){
-      daysInMonthArray.push({ type: 'aptitud', payload: day})
-    }
-    else{
-      daysInMonthArray.push({ type: 'workday', payload: day})
+    if(!alreadyAdded) {
+      if(isWeekEnd(day)){
+        daysInMonthArray.push({ type: 'weekend', date: day})
+      }
+      else {
+        daysInMonthArray.push({ type: 'workday', date: day})
+      }
     }
   }
   daysInMonthArray = daysInMonthArray.concat(fillerDatesAfter)

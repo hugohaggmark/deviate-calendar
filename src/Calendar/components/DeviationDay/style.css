@@ -1,0 +1,41 @@
+.vab-day,
+.sick-day,
+.vacay-day,
+.aptitud-day,
+.parental-leave-day,
+.holiday-day,
+.other-day {
+  font-size: 80%;
+  color: #ffffff;
+}
+.vab-day {
+  background-color: #7986cb;
+}
+.parental-leave-day {
+  background-color: #6c78b6;
+}
+.sick-day {
+  background-color: #90a4ae;
+}
+.vacay-day {
+  background-color: #81c784;
+}
+.holiday-day {
+  background-color: #ff9fad;
+}
+.other-day {
+  background-image: url('/img/annat.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.aptitud-day{
+  background-image: url('/img/aptitudlogo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}

@@ -4,52 +4,45 @@ import { constants as types } from '../Calendar'
 import { updateDateForArrayProperty } from '../Calendar/reducer'
 
 describe('Calendar Reducer', () => {
-  describe('Aptitud related days', () => {
-    describe('when reporting a date as Aptitud related', () => {
-      it('should be added to Aptitud related days', () => {
-        const date = new Date()
-        const state = new CalendarReducer(
-          {aptitudDays:[]}
-          , {type: types.REPORT_APTITUDDAY, payload:{date:date}})
-          state.aptitudDays.length.should.be.exactly(1)
-          state.aptitudDays[0].should.be.exactly(date)
-      })
-    })
-    describe('when clearing a date as Aptitud related', () => {
-      it('should be removed from Aptitud related days', () => {
-        const date = new Date()
-        const state = new CalendarReducer(
-          {aptitudDays:[date]}
-          , {type: types.CLEAR_APTITUDDAY, payload:{date:date}})
-          state.aptitudDays.length.should.be.exactly(0)
-      })
-    })
-  })
   describe('updateDateForArrayProperty', () => {
     describe('Adding an array property to an initial state', () => {
       it('should contain the new property', () => {
         const state = CalendarReducer()
-        const date = new Date(2016, 0, 1)
-        const newState = updateDateForArrayProperty(date, state, 'kalle')
+        const payload = {
+          date: new Date(2016, 0, 1),
+          type: 'kalle',
+        }
+        const newState = updateDateForArrayProperty(payload, state)
         newState.kalle.length.should.be.exactly(1)
-        newState.kalle[0].getDate().should.be.eql(date.getDate())
+        newState.kalle[0].getDate().should.be.eql(payload.date.getDate())
       })
     })
     describe('Adding a value to an existing array', () => {
       it('should contain the new value', () => {
         const state = CalendarReducer()
-        const date = new Date(2016, 0, 1)
-        const newState = updateDateForArrayProperty(date, state, 'reportedVABDays')
-        newState.reportedVABDays.length.should.be.exactly(1)
-        newState.reportedVABDays[0].getDate().should.be.eql(date.getDate())
+        const payload = {
+          date: new Date(2016, 0, 1),
+          type: 'reportedVABDays',
+        }
+        const payload2 = {
+          date: new Date(2016, 0, 2),
+          type: 'reportedVABDays',
+        }
+        let newState = updateDateForArrayProperty(payload, state)
+        newState = updateDateForArrayProperty(payload2, newState)
+        newState.reportedVABDays.length.should.be.exactly(2)
+        newState.reportedVABDays[1].getDate().should.be.eql(payload2.date.getDate())
       })
     })
     describe('Removing a value from an existing array', () => {
       it('should contain the new value', () => {
         const state = CalendarReducer()
-        const date = new Date(2016, 0, 1)
-        let newState = updateDateForArrayProperty(date, state, 'reportedVABDays')
-        newState = updateDateForArrayProperty(date, newState, 'reportedVABDays', true)
+        const payload = {
+          date: new Date(2016, 0, 1),
+          type: 'reportedVABDays',
+        }
+        let newState = updateDateForArrayProperty(payload, state)
+        newState = updateDateForArrayProperty(payload, newState, true)
         newState.reportedVABDays.length.should.be.exactly(0)
       })
     })
@@ -81,26 +74,6 @@ describe('Calendar Reducer', () => {
       state.months[9].should.be.exactly('Oktober');
       state.months[10].should.be.exactly('November');
       state.months[11].should.be.exactly('December');
-    })
-    it('should contain reported VAB days', () => {
-      const state = CalendarReducer()
-      state.reportedVABDays.length.should.be.exactly(0)
-    })
-    it('should contain reported Sickness days', () => {
-      const state = CalendarReducer()
-      state.reportedSicknessDays.length.should.be.exactly(0)
-    })
-    it('should contain reported Vacation days', () => {
-      const state = CalendarReducer()
-      state.reportedVacationDays.length.should.be.exactly(0)
-    })
-    it('should contain holiday days', () => {
-      const state = CalendarReducer()
-      should.exist(state.holidays)
-    })
-    it('should contain Aptitud related days', () => {
-      const state = CalendarReducer()
-      should.exist(state.aptitudDays)
     })
     it('should contain workHours', () => {
       const state = CalendarReducer()

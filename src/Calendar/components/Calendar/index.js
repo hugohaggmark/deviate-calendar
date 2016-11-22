@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import VABDay from '../VABDay'
-import SickDay from '../SickDay'
-import VacationDay from '../VacationDay'
 import WeekendDay from '../WeekendDay'
 import ClickableDay from '../ClickableDay'
 import SwipeableDay from '../SwipeableDay'
 import OtherMonthDay from '../OtherMonthDay'
-import AptitudDay from '../AptitudDay'
 import NextMonth from '../NextMonth'
 import PreviousMonth from '../PreviousMonth'
+import DeviationDay from '../DeviationDay'
 import './style.css'
 
 class Calendar extends Component{
@@ -33,19 +30,19 @@ class Calendar extends Component{
           {daysInMonth.map(function(day, index){
             switch (day.type) {
               case 'weekend':
-                return <WeekendDay value={day.payload} key={index} index={index}/>
+                return <WeekendDay value={day.date} key={index} index={index}/>
               case 'vab':
-                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="1"/>
+                return <SwipeableDay value={day.date} key={index} swipeStartIndex="1"/>
               case 'sickness':
-                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="2"/>
+                return <SwipeableDay value={day.date} key={index} swipeStartIndex="2"/>
               case 'vacation':
-                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="3"/>
+                return <SwipeableDay value={day.date} key={index} swipeStartIndex="3"/>
               case 'aptitud':
-                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="4"/>
+                return <SwipeableDay value={day.date} key={index} swipeStartIndex="4"/>
               case 'workday':
-                return <SwipeableDay value={day.payload} key={index} swipeStartIndex="0"/>
+                return <SwipeableDay value={day.date} key={index} swipeStartIndex="0"/>
               default:
-                return <OtherMonthDay key={index} index={index} type={day.type} value={day.payload}/>
+                return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
             }
           })}
         </ul>
@@ -53,19 +50,14 @@ class Calendar extends Component{
           {daysInMonth.map(function(day, index){
             switch (day.type) {
               case 'weekend':
-                return <WeekendDay value={day.payload} key={index} index={index}/>
-              case 'vab':
-                return <VABDay value={day.payload} key={index} index={index}/>
-              case 'sickness':
-                return <SickDay value={day.payload} key={index} index={index}/>
-              case 'vacation':
-                return <VacationDay value={day.payload} key={index} index={index}/>
-              case 'aptitud':
-                return <AptitudDay value={day.payload} key={index} index={index}/>
+                return <WeekendDay value={day.date} key={index} index={index}/>
               case 'workday':
-                return <ClickableDay value={day.payload} key={index} index={index}/>
+                return <ClickableDay value={day.date} key={index} index={index}/>
+              case 'other-month-day':
+              case 'other-month-weekend':
+                return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
               default:
-                return <OtherMonthDay key={index} index={index} type={day.type} value={day.payload}/>
+                return <DeviationDay key={index} index={index} payload={{...day}}/>
             }
           })}
         </ul>

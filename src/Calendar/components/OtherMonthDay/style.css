@@ -1,10 +1,10 @@
 .other-month-day{
   text-align: center;
-  background-color: ghostwhite;
+  background-color: #f8f8ff;
   cursor: default !important;
 }
 .other-month-weekend{
   text-align: center;
-  background-color: #d9edf7;
+  background-color: #dfdfff;
   cursor: default !important;
 }
