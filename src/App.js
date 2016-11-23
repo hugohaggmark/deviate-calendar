@@ -17,10 +17,9 @@ class App extends Component {
             <span className="text-muted"> Nollställ kommer att rensa allt du har matat in någonsin</span>
           </div>
         </div>
-        {/* <a href="#" className="btn btn-default" onClick={() => localStorage.removeItem('redux')}>Clear state...</a> */}
-        <Info/>
-        <Calendar />
-        <Report />
+        {/* <Info/>
+          <Calendar />
+        <Report /> */}
       </div>
     )
   }
