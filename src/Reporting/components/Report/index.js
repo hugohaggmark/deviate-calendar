@@ -63,6 +63,7 @@ class Report extends Component {
                       })
                       ])
                     }
+                    return null
                   })
                 }
               </tbody>

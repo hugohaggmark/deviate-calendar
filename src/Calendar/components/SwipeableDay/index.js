@@ -8,83 +8,67 @@ class SwipeableDay extends Component{
   pad = (n) => {
     return (n < 10) ? ("0" + n) : n;
   }
-  reportDeviation = (index, config) => {
-    switch (index) {
-      case 1:
-        config.clearSickness(config.value)
-        config.reportVAB(config.value)
-      break;
-      case 2:
-        config.clearVAB(config.value)
-        config.clearVacation(config.value)
-        config.reportSickness(config.value)
-      break;
-      case 3:
-        config.clearSickness(config.value)
-        config.clearAptitudDay(config.value)
-        config.reportVacation(config.value)
-      break;
-      case 4:
-        config.clearVacation(config.value)
-        config.reportAptitudDay(config.value)
-      break;
-      default:
-        config.clearVAB(config.value)
-        config.clearAptitudDay(config.value)
+  updateDeviation = (index, payload, deviations, reportDeviation, clearDeviation) => {
+    for (var i = 0; i < deviations.length; i++) {
+      if(index === i + 1) {
+        reportDeviation(payload.date, deviations[i].type)
+      } else {
+        clearDeviation(payload.date, deviations[i].type)
+      }
     }
   }
-  getClassName = index => {
-    switch (index) {
-      case 1:
-        return "col-sm-1 vab-day"
-      case 2:
-        return "col-sm-1 sick-day"
-      case 3:
-        return "col-sm-1 vacay-day"
-      case 4:
-        return "col-sm-1 aptitud-day"
-      default:
-        return "col-sm-1 work-day"
+  getDeviation = (payload, deviations) => {
+    if(!deviations) {
+      return null
     }
+
+    let found = deviations.filter(deviation => deviation.type === payload.type)
+
+    return found ? found[0] : null
+  }
+  getClassName = (deviation) => {
+    if(!deviation) {
+      return 'col-sm-1 work-day'
+    }
+
+    return `col-sm-1 ${deviation.type}`
+  }
+  getStartSlide = (payload, deviations) => {
+    if(!deviations){
+      return 0
+    }
+
+    for (let i = 0; i < deviations.length; i++) {
+      if(deviations[i].type === payload.type){
+        return i + 1
+      }
+    }
+
+    return 0
   }
   render(){
-    const {value,
-      reportVAB,
-      reportSickness,
-      reportVacation,
-      reportAptitudDay,
-      clearVAB,
-      clearSickness,
-      clearVacation,
-      clearAptitudDay,
-      swipeStartIndex} = this.props;
-    const startSlide = parseInt(swipeStartIndex, 10)
-    const config = {
-      value: value,
-      reportVAB: reportVAB,
-      reportSickness: reportSickness,
-      reportVacation: reportVacation,
-      reportAptitudDay: reportAptitudDay,
-      clearVAB: clearVAB,
-      clearSickness: clearSickness,
-      clearVacation: clearVacation,
-      clearAptitudDay: clearAptitudDay,
-    }
+    const { payload,
+      reportDeviation,
+      clearDeviation,
+      deviations,
+    } = this.props;
+    const startSlide = this.getStartSlide(payload, deviations)
+    const deviation = this.getDeviation(payload, deviations)
     return (
-      <li className={this.getClassName(startSlide)}>
+      <li className={this.getClassName(deviation)}>
         <ReactSwipe className="carousel" swipeOptions={
           {
             continuous: true,
             startSlide: startSlide,
             disableScroll: true,
             stopPropagation: true,
-            callback: (index, elem) => this.reportDeviation(index, config)
-          }} key={startSlide}>
-          <div><span>{this.pad(value.getDate())}</span></div>
-          <div><span>VAB</span></div>
-          <div><span>Sjuk</span></div>
-          <div><span>Semester</span></div>
-          <div><span>.</span></div>
+            callback: (index, elem) => this.updateDeviation(index, payload, deviations, reportDeviation, clearDeviation)
+          }} key={'startslide-' + startSlide}>
+          <div><span>{this.pad(payload.date.getDate())}</span></div>
+          { deviations && deviations.map((deviation, index) => {
+            return <div key={index}><span>{deviation.label}</span></div>
+          })
+          }
         </ReactSwipe>
       </li>
     )
@@ -92,13 +76,8 @@ class SwipeableDay extends Component{
 }
 
 export default connect(state =>({
+  deviations: state.calendar.deviations
 }), dispatch => ({
-  reportVAB: date => dispatch(actions.reportVABAction(date)),
-  reportSickness: date => dispatch(actions.reportSicknessAction(date)),
-  reportVacation: date => dispatch(actions.reportVacationAction(date)),
-  reportAptitudDay: date => dispatch(actions.reportAptitudDayAction(date)),
-  clearVAB: date => dispatch(actions.clearVABAction(date)),
-  clearSickness: date => dispatch(actions.clearSicknessAction(date)),
-  clearVacation: date => dispatch(actions.clearVacationAction(date)),
-  clearAptitudDay: date => dispatch(actions.clearAptitudDayAction(date)),
+  reportDeviation: (date, type) => dispatch(actions.reportDeviation(date, type)),
+  clearDeviation: (date, type) => dispatch(actions.clearDeviation(date, type)),
 }))(SwipeableDay)

@@ -14,6 +14,7 @@ class App extends Component {
         <div className="collapse" id="collapseExample">
           <div className="well">
             <a href="#" className="btn btn-danger" onClick={() => localStorage.removeItem('redux')}>Nollställ</a>
+            <span className="text-muted"> Nollställ kommer att rensa allt du har matat in någonsin</span>
           </div>
         </div>
         {/* <a href="#" className="btn btn-default" onClick={() => localStorage.removeItem('redux')}>Clear state...</a> */}

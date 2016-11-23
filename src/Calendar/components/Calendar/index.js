@@ -31,18 +31,11 @@ class Calendar extends Component{
             switch (day.type) {
               case 'weekend':
                 return <WeekendDay value={day.date} key={index} index={index}/>
-              case 'vab':
-                return <SwipeableDay value={day.date} key={index} swipeStartIndex="1"/>
-              case 'sickness':
-                return <SwipeableDay value={day.date} key={index} swipeStartIndex="2"/>
-              case 'vacation':
-                return <SwipeableDay value={day.date} key={index} swipeStartIndex="3"/>
-              case 'aptitud':
-                return <SwipeableDay value={day.date} key={index} swipeStartIndex="4"/>
-              case 'workday':
-                return <SwipeableDay value={day.date} key={index} swipeStartIndex="0"/>
-              default:
+              case 'other-month-day':
+              case 'other-month-weekend':
                 return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
+              default:
+                return <SwipeableDay key={index} index={index} payload={{...day}}/>
             }
           })}
         </ul>
