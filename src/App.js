@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Calendar } from './Calendar'
 import { Info } from './Information'
 import { Report } from './Reporting'
+import { Modal } from './Application'
 import './App.css'
 
 class App extends Component {
@@ -13,8 +14,10 @@ class App extends Component {
         </a>
         <div className="collapse" id="collapseExample">
           <div className="well">
-            <a href="#" className="btn btn-danger" onClick={() => localStorage.removeItem('redux')}>Nollställ</a>
-            <span className="text-muted"> Nollställ kommer att rensa allt du har matat in någonsin</span>
+            <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#myModal">
+              Nollställ
+            </button>
+            <Modal title="Nollställ" body="Nollställ kommer att rensa allt du har matat in någonsin" okLabel="Nollställ" okAction={() => localStorage.removeItem('redux')}/>
           </div>
         </div>
         <Info/>

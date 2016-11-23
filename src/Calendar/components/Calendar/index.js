@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import WeekendDay from '../WeekendDay'
 import ClickableDay from '../ClickableDay'
 import SwipeableDay from '../SwipeableDay'
