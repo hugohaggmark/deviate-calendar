@@ -17,9 +17,9 @@ class App extends Component {
             <span className="text-muted"> Nollställ kommer att rensa allt du har matat in någonsin</span>
           </div>
         </div>
-        {/* <Info/>
-          <Calendar />
-        <Report /> */}
+        <Info/>
+        <Calendar />
+        <Report />
       </div>
     )
   }

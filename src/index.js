@@ -21,7 +21,7 @@ const reducer = combineReducers({
   info: InformationReducer,
 })
 const store = createStore(reducer, {}, enhancer);
-//store.dispatch(calendarActions.loadDatesAction(new Date()))
+store.dispatch(calendarActions.loadDatesAction(new Date()))
 ReactDOM.render(
   <Provider store={store}>
     <App />
