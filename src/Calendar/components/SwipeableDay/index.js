@@ -9,6 +9,7 @@ class SwipeableDay extends Component{
     return (n < 10) ? ("0" + n) : n;
   }
   updateDeviation = (index, payload, deviations, reportDeviation, clearDeviation) => {
+    console.log('payload in update', payload);
     for (var i = 0; i < deviations.length; i++) {
       if(index === i + 1) {
         reportDeviation(payload.date, deviations[i].type)
@@ -63,7 +64,7 @@ class SwipeableDay extends Component{
             disableScroll: true,
             stopPropagation: true,
             callback: (index, elem) => this.updateDeviation(index, payload, deviations, reportDeviation, clearDeviation)
-          }} key={'startslide-' + startSlide}>
+          }} key={'startslide-' + startSlide + '-' + payload.date}>
           <div><span>{this.pad(payload.date.getDate())}</span></div>
           { deviations && deviations.map((deviation, index) => {
             return <div key={index}><span>{deviation.label}</span></div>
