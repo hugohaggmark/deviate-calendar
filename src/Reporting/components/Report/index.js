@@ -48,7 +48,7 @@ class Report extends Component {
                     if(!array){
                       return null
                     }
-                    let deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
+                    const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
                     if(deviationDates && deviationDates.length > 0) {
                       return ([
                         <tr key={property + '-header-' + index}>
