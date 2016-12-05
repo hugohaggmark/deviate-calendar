@@ -38,9 +38,10 @@ export const removeDateFromArray = (date, array) => {
 }
 export const getDatesInArrayForThisYearMonth = (year, month, array) => {
   if(!array)
-    return false
+    return []
 
-  return array.filter(day => new Date(day).getFullYear() === year && new Date(day).getMonth() === month)
+  const dates = array.filter(day => new Date(day).getFullYear() === year && new Date(day).getMonth() === month)
+  return dates.sort()
 }
 export const getFillerDaysBeforeThisMonth = date => {
   const year = date.getFullYear()
@@ -125,7 +126,7 @@ export const getDaysInMonthArray = state => {
           alreadyAdded = true
         }
         j++
-      }      
+      }
     }
     if(!alreadyAdded) {
       if(isWeekEnd(day)){
