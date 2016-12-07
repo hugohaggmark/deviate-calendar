@@ -23,8 +23,6 @@ export const sendMessage = (subject, body) => {
     },
     body: msg.toString()
   }
-  console.log(msg.toString());
-  console.log(options);
   fetch(settings.sendMailUri, options)
   .then(response => {
       if (response.status >= 400) {

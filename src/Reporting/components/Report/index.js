@@ -96,8 +96,7 @@ class Report extends Component {
       html += rows[i]
     }
     html += "</tbody><table>"
-
-    console.log(html);
+    
     return html
   }
   render( ) {

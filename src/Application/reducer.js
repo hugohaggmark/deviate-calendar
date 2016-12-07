@@ -24,7 +24,6 @@ const ApplicationReducer = (state = {}, action = {}) => {
       return {...state, id:token}
     case 'Authenticated':
       const google = parseHash(action.payload)
-      console.log(google.access_token)
       setCookie('deviate-calendar', google.access_token, parseInt(google.expires, 10))
       window.location.href = '/'
       return {...state, id:google.access_token}
