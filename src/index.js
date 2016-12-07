@@ -13,7 +13,7 @@ import { reducer as InformationReducer } from './Information'
 import { reducer as ApplicationReducer } from './Application'
 import App from './App';
 import { actions as calendarActions } from './Calendar'
-import { State, Login } from './Application'
+import { State, Login, OAuth } from './Application'
 import './index.css'
 
 const routingMiddleware = routerMiddleware(browserHistory)
@@ -32,6 +32,7 @@ const store = createStore(reducer, {}, enhancer);
 const history = syncHistoryWithStore(browserHistory, store)
 
 try {
+  store.dispatch({type:'Authorize'})
   store.dispatch(calendarActions.loadDatesAction(new Date()))
 } catch(err) {
   console.log(err.message)
@@ -45,17 +46,13 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated',
   allowRedirectBack: false
 })
-// const UserIsAuthenticated = UserAuthWrapper({
-//   authSelector: state => sessionStorage.getItem('token'),
-//   redirectAction: routerActions.replace,
-//   wrapperDisplayName: 'UserIsAuthenticated'
-// })
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={UserIsAuthenticated(App)}/>
       <Route path="login" component={Login}/>
+      <Route path="oauth" component={OAuth}/>
       <Route path="state" component={State}/>
     </Router>
   </Provider>,

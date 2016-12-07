@@ -1,17 +1,20 @@
 import React, {Component} from 'react'
-// import Modal from '../Modal'
-import Api from './api'
+import settings from '../../../settings.json'
 
 export default class Login extends Component {
-  _onLoginClick = () => {
-    Api.login();
-  };
   render() {
+    const authuri = settings.authUri
+    const scopes = settings.scopes
+    const redirect = window.location.origin + settings.redirectUri
+    const clientid = settings.clientId
+    const href = `${authuri}?scope=${scopes}&redirect_uri=${redirect}&response_type=token&client_id=${clientid}`
     return(
       <div className="container">
         <div className="row">
           <div className="col-xs-10 col-md-12">
-            <input className="btn btn-danger" type="button" onClick={() => this._onLoginClick()} value="Sign in with Google"/>
+            <a href={href} className="btn btn-danger">
+              Sign in with Google
+            </a>
           </div>
         </div>
       </div>
