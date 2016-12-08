@@ -1,5 +1,4 @@
 body {
-  background-color: #518eab;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -8,7 +7,6 @@ body {
 .container {
   margin-top: 20px;
   padding-top: 20px;
-  /*background-color: #fff;*/
 }
 
 .pointer {
@@ -18,7 +16,7 @@ body {
 .box-header {
   font-weight: bold;
   margin: 10px 0 10px 0px;
-  background-color: #fff;
+  background-color: #ececec;
 }
 
 .box {
@@ -26,7 +24,7 @@ body {
   margin-bottom: 20px;
   margin-top: 0;
   padding: 0px 10px;
-  background-color: #fff;
+  background-color: #ececec;
 }
 
 .margin-bottom {

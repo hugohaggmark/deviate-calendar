@@ -27,7 +27,7 @@ class App extends Component {
     const showReport = this.state.showReport
     const showInfo = this.state.showInfo || !hasInfo
     return (
-      <div className="container">
+      <div className="container col-md-offset-3">
         <Calendar />
         <div className="box col-md-7">
           <div className="box-header pointer" onClick={this.toggleInfo}>

@@ -3,12 +3,12 @@ import fetch from 'isomorphic-fetch'
 import settings from '../settings.json'
 import {getCookie} from './cookie'
 
-export const sendMessage = (subject, body) => {
+export const sendMessage = (to, subject, body) => {
   const msg = mimemessage.factory({
     contentType: 'multipart/mixed',
     body: []
   });
-  msg.header('to', 'hugo.haggmark@gmail.com');
+  msg.header('to', to);
   msg.header('subject', subject);
   const htmlEntity = mimemessage.factory({
     contentType: 'text/html;charset=utf-8',
