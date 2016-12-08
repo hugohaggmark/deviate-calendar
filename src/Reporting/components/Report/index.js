@@ -161,7 +161,9 @@ class Report extends Component {
               }
             </tbody>
           </table>
-          <input type="button" className="margin-bottom margin-right btn btn-primary pull-right" value={`Skicka tidrapport till ${info.email}`} onClick={() => gmail.sendMessage(info.email, subject, htmlReport)}/>
+          {info && info.email &&
+            <input type="button" className="margin-bottom margin-right btn btn-primary pull-right" value={`Skicka tidrapport till ${info.email}`} onClick={() => gmail.sendMessage(info.email, subject, htmlReport)}/>
+          }
         </div>
       </div>
   ) } }

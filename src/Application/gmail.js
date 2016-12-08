@@ -26,7 +26,7 @@ export const sendMessage = (to, subject, body) => {
   fetch(settings.sendMailUri, options)
   .then(response => {
       if (response.status >= 400) {
-          throw new Error("Bad response from server");
+          throw new Error("Bad response from Google");
       }
   })
   .catch(error => console.log(error.message))
