@@ -1,23 +1,4 @@
 .table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th {
   border: 0;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.report-header {
-  font-weight: bold;
-  margin: 10px 0 10px 0px;
-}
-
-.report {
-  border: 1px solid #dfdfdf;
-  margin-bottom: 20px;
-  margin-top: 0;
-  padding: 0px 10px;
-}
-
-.margin-bottom {
-  margin-bottom: 10px;
+  padding-left: 15px;
 }

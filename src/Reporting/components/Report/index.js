@@ -5,17 +5,6 @@ import {gmail} from '../../../Application'
 import './style.css'
 
 class Report extends Component {
-  constructor() {
-    super()
-    this.state = {
-      showReport: false,
-    }
-  }
-  toggleReport = () => {
-    this.setState({
-      showReport: !this.state.showReport
-    })
-  }
   createHtmlReport = (calendar, info, showInReportDeviations) => {
     const year = calendar.date.getFullYear()
     const month = calendar.date.getMonth()
@@ -110,8 +99,7 @@ class Report extends Component {
 
     return html
   }
-  render( ) {
-    const showReport = this.state.showReport
+  render() {
     const {calendar, info} = this.props
     const total = info.pricerate * calendar.billableHours
     const year = calendar.date.getFullYear()
@@ -120,70 +108,60 @@ class Report extends Component {
     const subject = `Tidrapport perioden ${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
-      <div>
-        <div className="report col-md-7">
-          <div className="report-header pointer" onClick={this.toggleReport}>
-            {!showReport && <span>Visa tidrapport</span>}
-            {!showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
-            {showReport && <span>Dölj tidrapport</span>}
-            {showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
-          </div>
-          {showReport &&
-            <div id="report" className="table-responsive">
-              <table className="table table-borderless table-condensed">
-                <tbody>
-                  <tr>
-                    <th colSpan="2">Kollega</th>
-                    <th colSpan="2">Period</th>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">{info.colleague}</td>
-                    <td colSpan="2">{calendar.formattedStartDate} -> {calendar.formattedEndDate}</td>
-                  </tr>
-                  <tr>
-                    <th colSpan="2">Kund</th>
-                    <th colSpan="2">Konto</th>
-                    <th colSpan="1">Timmar</th>
-                    <th colSpan="1">Pris</th>
-                    <th colSpan="1">Summa</th>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">{info.customer}</td>
-                    <td colSpan="2">{info.account}</td>
-                    <td colSpan="1">{calendar.billableHours}</td>
-                    <td colSpan="1">{info.pricerate}</td>
-                    <td colSpan="1">{total}</td>
-                  </tr>
-                  {
-                    showInReportDeviations && showInReportDeviations.map((deviation, index) => {
-                      let property = deviation.type
-                      let array = calendar[property]
-                      if(!array){
-                        return null
-                      }
-                      const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
-                      if(deviationDates && deviationDates.length > 0) {
-                        return ([
-                          <tr key={property + '-header-' + index}>
-                            <th colSpan="2">{deviation.label} - totalt {deviationDates.length} dag(ar)</th>
-                          </tr>,
-                        deviationDates.map((day, childIndex) => {
-                          return ([
-                            <tr key={property + '-details-' + childIndex}>
-                              <td colSpan="2">{getformattedDate(day)}</td>
-                            </tr>
-                          ])
-                        })
-                        ])
-                      }
-                      return null
-                    })
+      <div className="row">
+        <div id="report" className="table-responsive">
+          <table className="table table-borderless table-condensed">
+            <tbody>
+              <tr>
+                <th colSpan="2">Kollega</th>
+                <th colSpan="2">Period</th>
+              </tr>
+              <tr>
+                <td colSpan="2">{info.colleague}</td>
+                <td colSpan="2">{calendar.formattedStartDate} -> {calendar.formattedEndDate}</td>
+              </tr>
+              <tr>
+                <th colSpan="2">Kund</th>
+                <th colSpan="2">Konto</th>
+                <th colSpan="1">Timmar</th>
+                <th colSpan="1">Pris</th>
+                <th colSpan="1">Summa</th>
+              </tr>
+              <tr>
+                <td colSpan="2">{info.customer}</td>
+                <td colSpan="2">{info.account}</td>
+                <td colSpan="1">{calendar.billableHours}</td>
+                <td colSpan="1">{info.pricerate}</td>
+                <td colSpan="1">{total}</td>
+              </tr>
+              {
+                showInReportDeviations && showInReportDeviations.map((deviation, index) => {
+                  let property = deviation.type
+                  let array = calendar[property]
+                  if(!array){
+                    return null
                   }
-                </tbody>
-              </table>
-              <input type="button" className="margin-bottom btn btn-primary pull-right" value="Skicka tidrapport" onClick={() => gmail.sendMessage(subject, htmlReport)}/>
-            </div>
-          }
+                  const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
+                  if(deviationDates && deviationDates.length > 0) {
+                    return ([
+                      <tr key={property + '-header-' + index}>
+                        <th colSpan="2">{deviation.label} - totalt {deviationDates.length} dag(ar)</th>
+                      </tr>,
+                    deviationDates.map((day, childIndex) => {
+                      return ([
+                        <tr key={property + '-details-' + childIndex}>
+                          <td colSpan="2">{getformattedDate(day)}</td>
+                        </tr>
+                      ])
+                    })
+                    ])
+                  }
+                  return null
+                })
+              }
+            </tbody>
+          </table>
+          <input type="button" className="margin-bottom margin-right btn btn-primary pull-right" value="Skicka tidrapport" onClick={() => gmail.sendMessage(subject, htmlReport)}/>
         </div>
       </div>
   ) } }

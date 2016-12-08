@@ -5,3 +5,4 @@ export const customerChangedAction  = payload => ({type: types.CUSTOMER_CHANGED,
 export const accountChangedAction   = payload => ({type: types.ACCOUNT_CHANGED, payload: {account: payload} })
 export const pricerateChangedAction = payload => ({type: types.PRICERATE_CHANGED, payload: {pricerate: payload} })
 export const workHoursChangedAction = payload => ({type: types.WORKHOURS_CHANGED, payload: {workHours: payload} })
+export const emailChangedAction = payload => ({type: types.EMAIL_CHANGED, payload: {email: payload} })

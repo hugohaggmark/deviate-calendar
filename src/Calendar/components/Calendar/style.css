@@ -1,8 +1,9 @@
-ul{
+ul {
   list-style-type: none;
   display: block;
 }
-.days > li{
+
+.days>li {
   text-align: center;
   line-height: 20px;
   padding: 10px;
@@ -10,12 +11,13 @@ ul{
   border-bottom: 1px solid #c2c2c2;
   border-right: 1px solid #c2c2c2;
 }
-.days > li:nth-child(7n+1){
+
+.days>li:nth-child(7n+1) {
   clear: left;
   border-left: 1px solid #c2c2c2;
 }
-.weekday,
-.month{
+
+.weekday, .month {
   border-top: 1px solid #c2c2c2;
   border-right: 1px solid #c2c2c2;
   border-bottom: 1px solid #c2c2c2;
@@ -24,35 +26,39 @@ ul{
   padding: 10px;
   text-align: center;
 }
-.month:first-child{
+
+.month:first-child {
   cursor: pointer;
   clear: left;
   border-left: 1px solid #c2c2c2;
 }
-.month:last-child{
+
+.month:last-child {
   cursor: pointer;
 }
-.weekday:first-child{
+
+.weekday:first-child {
   clear: left;
   border-left: 1px solid #c2c2c2;
 }
-ul.weekdays{
+
+ul.weekdays {
   margin-bottom: 0px;
 }
-@media (max-width: 767px){
-  ul.days{
+
+@media (max-width: 767px) {
+  ul.days {
     margin-top: 20px;
   }
-  .other-month-day,
-  .other-month-weekend {
+  .other-month-day, .other-month-weekend {
     display: none;
   }
-  .days > li{
+  .days>li {
     border-left: 1px solid #c2c2c2;
     border-right: 1px solid #c2c2c2;
     line-height: 30px;
   }
-  .dropdown-menu{
+  .dropdown-menu {
     left: 27% !important;
   }
 }

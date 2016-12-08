@@ -12,6 +12,8 @@ const InformationReducer = (state = {}, action = {}) => {
       return {...state, pricerate: action.payload.pricerate }
     case types.WORKHOURS_CHANGED:
       return {...state, workHours: action.payload.workHours }
+    case types.EMAIL_CHANGED:
+      return {...state, email: action.payload.email }
     default:
       return state
   }
