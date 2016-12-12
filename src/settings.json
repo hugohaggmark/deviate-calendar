@@ -1,0 +1,7 @@
+{
+  "clientId": "332802020456-7t5ooonifnr7sphjvimnr7h13o4hv6j9.apps.googleusercontent.com",
+  "authUri": "https://accounts.google.com/o/oauth2/v2/auth",
+  "scopes": "https://www.googleapis.com/auth/gmail.send",
+  "sendMailUri": "https://www.googleapis.com/upload/gmail/v1/users/me/messages/send",
+  "redirectUri": "/oauth"
+}

@@ -15,45 +15,53 @@ class Calendar extends Component{
     const month = date.getMonth()
     const year = date.getFullYear()
     return (
-      <div className="row">
-        <ul className="months col-md-12">
-          <PreviousMonth/>
-          <li className="col-xs-8 col-sm-5 month">{months[month]} - {year}</li>
-          <NextMonth/>
-        </ul>
-        <ul className="weekdays col-md-12">
-          {weekdays.map(function(weekday, index){
-            return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
-          })}
-        </ul>
-        <ul className="days visible-xs col-md-12">
-          {daysInMonth.map(function(day, index){
-            switch (day.type) {
-              case 'weekend':
-                return <WeekendDay value={day.date} key={index} index={index}/>
-              case 'other-month-day':
-              case 'other-month-weekend':
-                return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
-              default:
-                return <SwipeableDay key={index} index={index} payload={{...day}}/>
-            }
-          })}
-        </ul>
-        <ul className="days hidden-xs col-md-12">
-          {daysInMonth.map(function(day, index){
-            switch (day.type) {
-              case 'weekend':
-                return <WeekendDay value={day.date} key={index} index={index}/>
-              case 'workday':
-                return <ClickableDay value={day.date} key={index} index={index}/>
-              case 'other-month-day':
-              case 'other-month-weekend':
-                return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
-              default:
-                return <DeviationDay key={index} index={index} payload={{...day}}/>
-            }
-          })}
-        </ul>
+      <div>
+        <div className="row">
+          <ul className="months col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-2">
+            <PreviousMonth/>
+            <li className="col-xs-8 col-sm-5 month">{months[month]} - {year}</li>
+            <NextMonth/>
+          </ul>
+        </div>
+        <div className="row">
+          <ul className="weekdays col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-2">
+            {weekdays.map(function(weekday, index){
+              return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
+            })}
+          </ul>
+        </div>
+        <div className="row">
+          <ul className="days visible-xs col-xs-10 col-xs-offset-1">
+            {daysInMonth.map(function(day, index){
+              switch (day.type) {
+                case 'weekend':
+                  return <WeekendDay value={day.date} key={index} index={index}/>
+                case 'other-month-day':
+                case 'other-month-weekend':
+                  return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
+                default:
+                  return <SwipeableDay key={index} index={index} payload={{...day}}/>
+              }
+            })}
+          </ul>
+        </div>
+        <div className="row">
+          <ul className="days hidden-xs col-sm-12 col-sm-offset-2">
+            {daysInMonth.map(function(day, index){
+              switch (day.type) {
+                case 'weekend':
+                  return <WeekendDay value={day.date} key={index} index={index}/>
+                case 'workday':
+                  return <ClickableDay value={day.date} key={index} index={index}/>
+                case 'other-month-day':
+                case 'other-month-weekend':
+                  return <OtherMonthDay key={index} index={index} type={day.type} value={day.date}/>
+                default:
+                  return <DeviationDay key={index} index={index} payload={{...day}}/>
+              }
+            })}
+          </ul>
+        </div>
       </div>
     )
   }

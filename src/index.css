@@ -3,3 +3,40 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.container {
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.box-header {
+  font-weight: bold;
+  margin: 10px 0 10px 0px;
+  background-color: #ececec;
+}
+
+.box {
+  border: 1px solid #c2c2c2;
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding: 0px 10px;
+  background-color: #ececec;
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
+}
+
+.margin-right {
+  margin-right: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .table-responsive {
+    border: 0;
+  }
+}

@@ -24,7 +24,7 @@ class ClickableDay extends Component{
             {deviations &&
               deviations.map(function(deviation, index){
                 return <li key={index}><a href="#" onClick={() => reportDeviation(value, deviation.type)}>{deviation.label}</a></li>
-            })}
+              })}
           </ul>
         </div>
       </li>

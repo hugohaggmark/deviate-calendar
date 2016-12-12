@@ -1,4 +1,4 @@
-.table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th{
+.table-borderless>tbody>tr>td, .table-borderless>tbody>tr>th {
   border: 0;
+  padding-left: 15px;
 }

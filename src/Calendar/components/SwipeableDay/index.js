@@ -9,7 +9,6 @@ class SwipeableDay extends Component{
     return (n < 10) ? ("0" + n) : n;
   }
   updateDeviation = (index, payload, deviations, reportDeviation, clearDeviation) => {
-    console.log('payload in update', payload);
     for (var i = 0; i < deviations.length; i++) {
       if(index === i + 1) {
         reportDeviation(payload.date, deviations[i].type)

@@ -3,3 +3,4 @@ export const CUSTOMER_CHANGED   = 'deviate-calendar/Information/CUSTOMER_CHANGED
 export const ACCOUNT_CHANGED    = 'deviate-calendar/Information/ACCOUNT_CHANGED'
 export const PRICERATE_CHANGED  = 'deviate-calendar/Information/PRICERATE_CHANGED'
 export const WORKHOURS_CHANGED  = 'deviate-calendar/Information/WORKHOURS_CHANGED'
+export const EMAIL_CHANGED      = 'deviate-calendar/Information/EMAIL_CHANGED'

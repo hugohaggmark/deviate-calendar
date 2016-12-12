@@ -9,9 +9,9 @@ export default class WeekendDay extends Component{
     const {value, index} = this.props;
     return (
       <li id={'day-' + index} className="col-sm-1 weekend-day">
-        <div className="col-sm-12">
+        <span className="text-muted">
           {this.pad(value.getDate())}
-        </div>
+        </span>
       </li>
     )
   }
