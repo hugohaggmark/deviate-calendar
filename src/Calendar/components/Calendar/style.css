@@ -47,8 +47,8 @@ ul.weekdays {
 }
 
 @media (max-width: 767px) {
-  ul.days {
-    margin-top: 20px;
+  ul.months {
+    margin-bottom: 0;
   }
   .other-month-day, .other-month-weekend {
     display: none;

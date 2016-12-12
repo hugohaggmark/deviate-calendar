@@ -18,8 +18,8 @@ class Info extends Component{
       emailChanged,
     } = this.props
     return(
-      <div className="row">
-        <div className="form-group col-md-6">
+      <div>
+        <div className="form-group col-xs-12 col-md-6">
           <label htmlFor="colleague">Kollega</label>
           <input type="text" defaultValue={colleague} id="colleague" className="form-control" onChange={colleagueChanged}/>
           <label htmlFor="customer">Kund</label>
@@ -27,7 +27,7 @@ class Info extends Component{
           <label htmlFor="workHours">Arbetstid</label>
           <input type="text" defaultValue={workHours} id="workHours" className="form-control" onChange={workHoursChanged}/>
         </div>
-        <div className="form-group col-md-6">
+        <div className="form-group col-xs-12 col-md-6">
           <label htmlFor="account">Konto</label>
           <input type="text" defaultValue={account} id="account" className="form-control" onChange={accountChanged}/>
           <label htmlFor="pricerate">Pris</label>

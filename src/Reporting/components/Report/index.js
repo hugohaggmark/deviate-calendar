@@ -108,63 +108,61 @@ class Report extends Component {
     const subject = `Tidrapport perioden ${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
-      <div className="row">
-        <div id="report" className="table-responsive">
-          <table className="table table-borderless table-condensed">
-            <tbody>
-              <tr>
-                <th colSpan="2">Kollega</th>
-                <th colSpan="2">Period</th>
-              </tr>
-              <tr>
-                <td colSpan="2">{info.colleague}</td>
-                <td colSpan="2">{calendar.formattedStartDate} -> {calendar.formattedEndDate}</td>
-              </tr>
-              <tr>
-                <th colSpan="2">Kund</th>
-                <th colSpan="2">Konto</th>
-                <th colSpan="1">Timmar</th>
-                <th colSpan="1">Pris</th>
-                <th colSpan="1">Summa</th>
-              </tr>
-              <tr>
-                <td colSpan="2">{info.customer}</td>
-                <td colSpan="2">{info.account}</td>
-                <td colSpan="1">{calendar.billableHours}</td>
-                <td colSpan="1">{info.pricerate}</td>
-                <td colSpan="1">{total}</td>
-              </tr>
-              {
-                showInReportDeviations && showInReportDeviations.map((deviation, index) => {
-                  let property = deviation.type
-                  let array = calendar[property]
-                  if(!array){
-                    return null
-                  }
-                  const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
-                  if(deviationDates && deviationDates.length > 0) {
-                    return ([
-                      <tr key={property + '-header-' + index}>
-                        <th colSpan="2">{deviation.label} - totalt {deviationDates.length} dag(ar)</th>
-                      </tr>,
-                    deviationDates.map((day, childIndex) => {
-                      return ([
-                        <tr key={property + '-details-' + childIndex}>
-                          <td colSpan="2">{getformattedDate(day)}</td>
-                        </tr>
-                      ])
-                    })
-                    ])
-                  }
+      <div>
+        <table className="table table-responsive table-borderless table-condensed">
+          <tbody>
+            <tr>
+              <th colSpan="2">Kollega</th>
+              <th colSpan="2">Period</th>
+            </tr>
+            <tr>
+              <td colSpan="2">{info.colleague}</td>
+              <td colSpan="2">{calendar.formattedStartDate} -> {calendar.formattedEndDate}</td>
+            </tr>
+            <tr>
+              <th colSpan="2">Kund</th>
+              <th colSpan="2">Konto</th>
+              <th colSpan="1">Timmar</th>
+              <th colSpan="1">Pris</th>
+              <th colSpan="1">Summa</th>
+            </tr>
+            <tr>
+              <td colSpan="2">{info.customer}</td>
+              <td colSpan="2">{info.account}</td>
+              <td colSpan="1">{calendar.billableHours}</td>
+              <td colSpan="1">{info.pricerate}</td>
+              <td colSpan="1">{total}</td>
+            </tr>
+            {
+              showInReportDeviations && showInReportDeviations.map((deviation, index) => {
+                let property = deviation.type
+                let array = calendar[property]
+                if(!array){
                   return null
-                })
-              }
-            </tbody>
-          </table>
-          {info && info.email &&
-            <input type="button" className="margin-bottom margin-right btn btn-primary pull-right" value={`Skicka tidrapport till ${info.email}`} onClick={() => gmail.sendMessage(info.email, subject, htmlReport)}/>
-          }
-        </div>
+                }
+                const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
+                if(deviationDates && deviationDates.length > 0) {
+                  return ([
+                    <tr key={property + '-header-' + index}>
+                      <th colSpan="2">{deviation.label} - totalt {deviationDates.length} dag(ar)</th>
+                    </tr>,
+                  deviationDates.map((day, childIndex) => {
+                    return ([
+                      <tr key={property + '-details-' + childIndex}>
+                        <td colSpan="2">{getformattedDate(day)}</td>
+                      </tr>
+                    ])
+                  })
+                  ])
+                }
+                return null
+              })
+            }
+          </tbody>
+        </table>
+        {info && info.email &&
+          <input type="button" className="margin-bottom margin-right btn btn-primary pull-right" value={`Skicka tidrapport till ${info.email}`} onClick={() => gmail.sendMessage(info.email, subject, htmlReport)}/>
+        }
       </div>
   ) } }
 export default connect(

@@ -28,28 +28,34 @@ class App extends Component {
     const showInfo = this.state.showInfo || !hasInfo
     return (
       <div className="container">
-        <Calendar />
-        <div className="box col-md-7">
-          <div className="box-header pointer" onClick={this.toggleInfo}>
-            {!showInfo && <span>Visa personuppgifter</span>}
-            {!showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
-            {showInfo && <span>Dölj personuppgifter</span>}
-            {showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
+        <div className="row">
+          <Calendar />
+          <div className="row">
+            <div className="box col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
+              <div className="box-header pointer" onClick={this.toggleInfo}>
+                {!showInfo && <span>Visa personuppgifter</span>}
+                {!showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
+                {showInfo && <span>Dölj personuppgifter</span>}
+                {showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
+              </div>
+              {showInfo &&
+                <Info />
+              }
+            </div>
           </div>
-          {showInfo &&
-            <Info />
-          }
-        </div>
-        <div className="box col-md-7">
-          <div className="box-header pointer" onClick={this.toggleReport}>
-            {!showReport && <span>Visa tidrapport</span>}
-            {!showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
-            {showReport && <span>Dölj tidrapport</span>}
-            {showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
+          <div className="row">
+            <div className="box col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
+              <div className="box-header pointer" onClick={this.toggleReport}>
+                {!showReport && <span>Visa tidrapport</span>}
+                {!showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
+                {showReport && <span>Dölj tidrapport</span>}
+                {showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
+              </div>
+              {showReport &&
+                <Report />
+              }
+            </div>
           </div>
-          {showReport &&
-            <Report />
-          }
         </div>
       </div>
     )
