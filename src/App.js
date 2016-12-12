@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
 import {Calendar} from './Calendar'
 import {Info} from './Information'
 import {Report} from './Reporting'
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super()
     this.state = {
@@ -23,9 +22,8 @@ class App extends Component {
     })
   }
   render() {
-    const {hasInfo} = this.props
     const showReport = this.state.showReport
-    const showInfo = this.state.showInfo || !hasInfo
+    const showInfo = this.state.showInfo
     return (
       <div className="container">
         <div className="row">
@@ -61,14 +59,3 @@ class App extends Component {
     )
   }
 }
-
-export default connect(state => ({
-  hasInfo: state.info.colleague &&
-  state.info.customer &&
-  state.info.account &&
-  state.info.pricerate &&
-  state.info.workHours &&
-  state.info.email
-}), dispatch =>({
-
-}))(App)
