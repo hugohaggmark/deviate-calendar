@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Spinner from 'react-spinkit'
 import {Calendar} from './Calendar'
 import {Info} from './Information'
 import {Report} from './Reporting'
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super()
     this.state = {
@@ -22,10 +24,14 @@ export default class App extends Component {
     })
   }
   render() {
+    const {showSpinner} = this.props
     const showReport = this.state.showReport
     const showInfo = this.state.showInfo
     return (
       <div className="container">
+        { showSpinner &&
+          <Spinner spinnerName="spinner" noFadeIn />
+        }
         <div className="row">
           <Calendar />
           <div className="row">
@@ -59,3 +65,7 @@ export default class App extends Component {
     )
   }
 }
+
+export default connect(state =>({
+  showSpinner: state.application.showSpinner
+}))(App)

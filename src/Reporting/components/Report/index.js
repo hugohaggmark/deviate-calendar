@@ -99,8 +99,12 @@ class Report extends Component {
 
     return html
   }
+  sendEmail = (showSpinner, hideSpinner, email, subject, htmlReport) => {
+    showSpinner()
+    gmail.sendMessage(hideSpinner, email, subject, htmlReport)
+  }
   render() {
-    const {calendar, info} = this.props
+    const {calendar, info, showSpinner, hideSpinner} = this.props
     const total = info.pricerate * calendar.billableHours
     const year = calendar.date.getFullYear()
     const month = calendar.date.getMonth()
@@ -164,7 +168,7 @@ class Report extends Component {
         </div>
         <div className="col-xs-12">
           {info && info.email &&
-            <input type="button" className="margin-bottom btn btn-primary" value={`Skicka tidrapport`} onClick={() => gmail.sendMessage(info.email, subject, htmlReport)}/>
+            <input type="button" className="margin-bottom btn btn-primary" value={`Skicka tidrapport`} onClick={() => this.sendEmail(showSpinner, hideSpinner, info.email, subject, htmlReport)}/>
           }
         </div>
       </div>
@@ -174,5 +178,6 @@ state =>({
   calendar : state.calendar,
   info : state.info,
 }), dispatch => ({
-
+  showSpinner: () => dispatch({type:'ShowSpinner'}),
+  hideSpinner: () => dispatch({type:'HideSpinner'})
 }))(Report)

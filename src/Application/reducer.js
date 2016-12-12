@@ -14,7 +14,7 @@ const parseHash = (hash) => {
   }
 }
 
-const ApplicationReducer = (state = {}, action = {}) => {
+const ApplicationReducer = (state = {showSpinner:false}, action = {}) => {
   switch (action.type) {
     case 'Authorize':
       const token = getCookie('deviate-calendar')
@@ -27,6 +27,10 @@ const ApplicationReducer = (state = {}, action = {}) => {
       setCookie('deviate-calendar', google.access_token, parseInt(google.expires, 10))
       window.location.href = '/'
       return {...state, id:google.access_token}
+    case 'ShowSpinner':
+      return {...state, showSpinner:true}
+    case 'HideSpinner':
+      return {...state, showSpinner:false}
     default:
       return {...state}
   }

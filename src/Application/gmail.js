@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import settings from '../settings.json'
 import {getCookie} from './cookie'
 
-export const sendMessage = (to, subject, body) => {
+export const sendMessage = (hideSpinner, to, subject, body) => {
   const msg = mimemessage.factory({
     contentType: 'multipart/mixed',
     body: []
@@ -28,6 +28,7 @@ export const sendMessage = (to, subject, body) => {
       if (response.status >= 400) {
           throw new Error("Bad response from Google");
       }
+      hideSpinner()
   })
   .catch(error => console.log(error.message))
 }
