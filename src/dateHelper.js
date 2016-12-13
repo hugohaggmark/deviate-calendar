@@ -16,7 +16,8 @@ export const formatDate = (year, month, day) => {
   return [stringYear, stringMonth, stringDay].join('-');
 }
 export const getformattedDate = date => {
-  return formatDate(new Date(date).getFullYear(), new Date(date).getMonth(), new Date(date).getDate())
+  const newDate = new Date(date)
+  return formatDate(newDate.getFullYear(), newDate.getMonth(), newDate.getDate())
 }
 export const isWeekEnd = date => {
   if(!date)
@@ -41,7 +42,10 @@ export const getDatesInArrayForThisYearMonth = (year, month, array) => {
     return []
 
   const dates = array.filter(day => new Date(day).getFullYear() === year && new Date(day).getMonth() === month)
-  return dates.sort()
+  const formattedDates = dates.map((day, index) => {
+    return getformattedDate(day)
+  })
+  return formattedDates.sort()
 }
 export const getFillerDaysBeforeThisMonth = date => {
   const year = date.getFullYear()

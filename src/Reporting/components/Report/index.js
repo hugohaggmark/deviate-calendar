@@ -20,7 +20,7 @@ class Report extends Component {
       rows[rows.length] = startTableHeader
       rows[rows.length] = "Kollega"
       rows[rows.length] = endTableHeader
-      rows[rows.length] = startTableHeader
+      rows[rows.length] = '<th colspan="4" style="text-align: left;">'
       rows[rows.length] = "Period"
       rows[rows.length] = endTableHeader
     rows[rows.length] = endTableRow
@@ -28,7 +28,7 @@ class Report extends Component {
       rows[rows.length] = startTableData
       rows[rows.length] = info.colleague
       rows[rows.length] = endTableData
-      rows[rows.length] = startTableData
+      rows[rows.length] = '<td colspan="4" style="text-align: left;">'
       rows[rows.length] = `${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
       rows[rows.length] = endTableData
     rows[rows.length] = endTableRow
@@ -76,13 +76,13 @@ class Report extends Component {
         if (deviationDates.length > 0) {
           rows[rows.length] = "<tr><td>&nbsp;</td></tr>"
           rows[rows.length] = startTableRow
-            rows[rows.length] = startTableHeader
+            rows[rows.length] = '<th colspan="3" style="text-align: left;">'
             rows[rows.length] = `${deviation.label} - totalt ${deviationDates.length} dag(ar)`
             rows[rows.length] = endTableHeader
           rows[rows.length] = endTableRow
           deviationDates.map((date, index) => {
             rows[rows.length] = startTableRow
-              rows[rows.length] = startTableData
+              rows[rows.length] = '<td colspan="3" style="text-align: left;">'
               rows[rows.length] = getformattedDate(date)
               rows[rows.length] = endTableData
             rows[rows.length] = endTableRow
@@ -146,6 +146,7 @@ class Report extends Component {
                     return null
                   }
                   const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
+                  console.log('deviationDates', deviationDates);
                   if(deviationDates && deviationDates.length > 0) {
                     return ([
                       <tr key={property + '-header-' + index}>
