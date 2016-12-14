@@ -33,7 +33,7 @@ class Info extends Component{
           <label htmlFor="pricerate">Pris</label>
           <input type="text" defaultValue={pricerate} id="pricerate" className="form-control" onChange={pricerateChanged}/>
           <label htmlFor="email">E-postadress att skicka tidrapport till</label>
-          <input type="text" defaultValue={email} id="email" className="form-control" onChange={emailChanged}/>
+          <input type="email" defaultValue={email} id="email" className="form-control" onChange={emailChanged}/>
         </div>
       </div>
     )
