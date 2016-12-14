@@ -13,7 +13,7 @@ import { reducer as InformationReducer } from './Information'
 import { reducer as ApplicationReducer } from './Application'
 import App from './App';
 import { actions as calendarActions } from './Calendar'
-import { State, Login, OAuth } from './Application'
+import { State, Login, OAuth, Settings } from './Application'
 import './index.css'
 
 const routingMiddleware = routerMiddleware(browserHistory)
@@ -54,6 +54,7 @@ ReactDOM.render(
       <Route path="login" component={Login}/>
       <Route path="oauth" component={OAuth}/>
       <Route path="state" component={State}/>
+      <Route path="settings" component={Settings}/>
     </Router>
   </Provider>,
   document.getElementById('mount')
