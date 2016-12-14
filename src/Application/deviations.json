@@ -1,0 +1,59 @@
+{
+  "deviations": [{
+    "id": 1,
+    "type": "vab-day",
+    "label": "VAB",
+    "showInReport": true,
+    "style": {
+      "backgroundColor": "#7986cb"
+    }
+  }, {
+    "id": 2,
+    "type": "parental-leave-day",
+    "label": "Föräldraledig",
+    "showInReport": true,
+    "style": {
+      "backgroundColor": "#6c78b6"
+    }
+  }, {
+    "id": 3,
+    "type": "sick-day",
+    "label": "Sjuk",
+    "showInReport": true,
+    "style": {
+      "backgroundColor": "#90a4ae"
+    }
+  }, {
+    "id": 4,
+    "type": "aptitud-day",
+    "label": "Aptitud",
+    "showInReport": false,
+    "style": {
+      "backgroundColor": "#7986cb"
+    }
+  }, {
+    "id": 5,
+    "type": "vacay-day",
+    "label": "Semester",
+    "showInReport": true,
+    "style": {
+      "backgroundColor": "#81c784"
+    }
+  }, {
+    "id": 6,
+    "type": "holiday-day",
+    "label": "Helgdag",
+    "showInReport": false,
+    "style": {
+      "backgroundColor": "#ff9fad"
+    }
+  }, {
+    "id": 7,
+    "type": "other-day",
+    "label": "Annat",
+    "showInReport": false,
+    "style": {
+      "backgroundColor": "#7986cb"
+    }
+  }]
+}

@@ -34,6 +34,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 try {
   store.dispatch(ApplicationActions.authorizeAction())
+  store.dispatch(ApplicationActions.loadDeviationsAction())
   store.dispatch(calendarActions.loadDatesAction(new Date()))
 } catch(err) {
   console.log(err.message)

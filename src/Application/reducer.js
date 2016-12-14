@@ -1,5 +1,6 @@
 import {setCookie, getCookie} from './cookie'
 import * as constants from './constants'
+import json from './deviations.json'
 
 const parseHash = (hash) => {
   if (!hash)
@@ -32,6 +33,16 @@ const ApplicationReducer = (state = {showSpinner:false}, action = {}) => {
       return {...state, showSpinner:true}
     case constants.HIDESPINNER:
       return {...state, showSpinner:false}
+    case constants.LOADDEVIATIONS:
+      return {...state, deviations:json.deviations}
+    case constants.UPDATEDEVIATION:
+      const found = state.deviations.map(deviation => {return deviation.id}).indexOf(action.payload.id)
+      if (found === -1) {
+        return {...state}
+      }
+      const newState = JSON.parse(JSON.stringify(state))
+      newState.deviations[found] = {...action.payload}
+      return {...newState}
     default:
       return {...state}
   }
