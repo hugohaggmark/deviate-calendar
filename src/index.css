@@ -1,5 +1,8 @@
-body {
+html, body {
   overflow-x: hidden;
+}
+
+body {
   background-color: #fdfdfd;
   margin: 0;
   padding: 0;
@@ -57,12 +60,9 @@ body {
 }
 
 @media screen and (max-width: 767px) {
-  html, body {
-    overflow: hidden;
-  }
   .container {
     margin-left: 0%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
   .table-responsive {
     border: 0;
