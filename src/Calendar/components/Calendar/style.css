@@ -10,6 +10,7 @@ ul {
   cursor: pointer;
   border-bottom: 1px solid #c2c2c2;
   border-right: 1px solid #c2c2c2;
+  box-shadow: 1px 1px 1px #c2c2c2;
 }
 
 .days>li:nth-child(7n+1) {
@@ -25,6 +26,7 @@ ul {
   line-height: 10px;
   padding: 10px;
   text-align: center;
+  box-shadow: 1px 1px 1px #c2c2c2;
 }
 
 .month:first-child {

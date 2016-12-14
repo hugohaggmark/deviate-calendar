@@ -17,14 +17,14 @@ class Calendar extends Component{
     return (
       <div>
         <div className="row">
-          <ul className="months col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-2">
+          <ul className="months col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0">
             <PreviousMonth/>
             <li className="col-xs-8 col-sm-5 month">{months[month]} - {year}</li>
             <NextMonth/>
           </ul>
         </div>
         <div className="row">
-          <ul className="weekdays col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-2">
+          <ul className="weekdays col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0">
             {weekdays.map(function(weekday, index){
               return <li className="weekday col-sm-1 hidden-xs" key={index}>{weekday}</li>
             })}
@@ -46,7 +46,7 @@ class Calendar extends Component{
           </ul>
         </div>
         <div className="row">
-          <ul className="days hidden-xs col-sm-12 col-sm-offset-2">
+          <ul className="days hidden-xs col-sm-12 col-sm-offset-0">
             {daysInMonth.map(function(day, index){
               switch (day.type) {
                 case 'weekend':

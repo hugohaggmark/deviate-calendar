@@ -69,6 +69,7 @@ class Report extends Component {
     rows[rows.length] = endTableRow
 
     if (showInReportDeviations) {
+      // eslint-disable-next-line
       showInReportDeviations.map((deviation, index) => {
         const property = deviation.type
         const array = calendar[property]
@@ -80,6 +81,7 @@ class Report extends Component {
             rows[rows.length] = `${deviation.label} - totalt ${deviationDates.length} dag(ar)`
             rows[rows.length] = endTableHeader
           rows[rows.length] = endTableRow
+          // eslint-disable-next-line
           deviationDates.map((date, index) => {
             rows[rows.length] = startTableRow
               rows[rows.length] = '<td colspan="3" style="text-align: left;">'
@@ -112,9 +114,9 @@ class Report extends Component {
     const subject = `Tidrapport perioden ${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
-      <div>
-        <div>
-          <table className="table table-responsive table-borderless table-condensed">
+      <div className="col-xs-12 box">
+        <div className="table-responsive">
+          <table className="table table-borderless table-condensed">
             <tbody>
               <tr>
                 <th colSpan="1">Kollega</th>
