@@ -115,8 +115,8 @@ class Report extends Component {
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
       <div className="col-xs-12 box">
-        <div>
-          <table className="table table-responsive table-borderless table-condensed">
+        <div className="table-responsive">
+          <table className="table table-borderless table-condensed">
             <tbody>
               <tr>
                 <th colSpan="1">Kollega</th>
