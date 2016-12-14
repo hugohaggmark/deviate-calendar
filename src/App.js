@@ -35,7 +35,7 @@ class App extends Component {
         <div className="row">
           <Calendar />
           <div className="row">
-            <div className="box col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
+            <div className="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
               <div className="box-header pointer" onClick={this.toggleInfo}>
                 {!showInfo && <span>Visa personuppgifter</span>}
                 {!showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}
@@ -48,7 +48,7 @@ class App extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="box col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
+            <div className="col-xs-10 col-xs-offset-1 col-sm-7 col-sm-offset-2">
               <div className="box-header pointer" onClick={this.toggleReport}>
                 {!showReport && <span>Visa tidrapport</span>}
                 {!showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-right"></i></span>}

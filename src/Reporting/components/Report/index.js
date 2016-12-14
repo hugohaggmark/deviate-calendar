@@ -114,7 +114,7 @@ class Report extends Component {
     const subject = `Tidrapport perioden ${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
-      <div>
+      <div className="col-xs-12 box">
         <div>
           <table className="table table-responsive table-borderless table-condensed">
             <tbody>

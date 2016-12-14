@@ -1,7 +1,3 @@
-html, body {
-  overflow: hidden;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -31,15 +27,19 @@ body {
 
 .box-header {
   font-weight: bold;
-  margin: 10px 0 10px 0px;
+  margin-top: 10px;
   background-color: #ececec;
+  border: 1px solid #c2c2c2;
+  padding: 10px;
 }
 
 .box {
-  border: 1px solid #c2c2c2;
+  border-bottom: 1px solid #c2c2c2;
+  border-left: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
   margin-bottom: 20px;
   margin-top: 0;
-  padding: 0px 10px;
+  padding: 10px;
   background-color: #ececec;
 }
 
@@ -52,6 +52,9 @@ body {
 }
 
 @media screen and (max-width: 767px) {
+  html, body {
+    overflow: hidden;
+  }
   .table-responsive {
     border: 0;
   }
