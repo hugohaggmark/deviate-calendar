@@ -4,7 +4,19 @@ import { SketchPicker } from 'react-color';
 import * as actions from '../../actions'
 
 class Deviation extends Component {
+  constructor () {
+    super()
+    this.state = {
+      backgroundPickerVisible: false
+    }
+  }
+  togglebackgroundPicker = () => {
+    this.setState({
+      backgroundPickerVisible: !this.state.backgroundPickerVisible
+    })
+  }
   render () {
+    const backgroundPickerVisible = this.state.backgroundPickerVisible
     const {deviation, updateDeviation} = this.props
     return (
       <div className="well">
@@ -34,13 +46,22 @@ class Deviation extends Component {
           <div className="form-group">
             <label className="col-xs-5 col-sm-3 control-label" htmlFor={"deviation-background-" + deviation.id}>Bakgrundsfärg:</label>
             <div className="col-xs-5 col-sm-5 col-md-3">
-              <input type="text" defaultValue={deviation.style.backgroundColor} id={"deviation-background-" + deviation.id} className="form-control" readOnly/>
-              <SketchPicker
-                disableAlpha={true}
-                width="140px"
-                color={deviation.style.backgroundColor}
-                onChangeComplete={(color) => updateDeviation({...deviation, style:{backgroundColor: `${color.hex}`}})}
-              />
+              <div className="input-group">
+                <input type="text" defaultValue={deviation.style.backgroundColor} id={"deviation-background-" + deviation.id} className="form-control" readOnly style={deviation.style}/>
+                <span className="input-group-btn">
+                  <button className="btn btn-default" type="button" onClick={() => this.togglebackgroundPicker()}>
+                    {backgroundPickerVisible ? "Stäng" : "Ändra..."}
+                  </button>
+                </span>
+              </div>
+              {backgroundPickerVisible &&
+                <SketchPicker
+                  disableAlpha={true}
+                  width="140px"
+                  color={deviation.style.backgroundColor}
+                  onChangeComplete={(color) => updateDeviation({...deviation, style:{backgroundColor: `${color.hex}`}})}
+                />
+              }
             </div>
           </div>
         </div>
