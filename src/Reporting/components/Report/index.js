@@ -69,6 +69,7 @@ class Report extends Component {
     rows[rows.length] = endTableRow
 
     if (showInReportDeviations) {
+      // eslint-disable-next-line
       showInReportDeviations.map((deviation, index) => {
         const property = deviation.type
         const array = calendar[property]
@@ -80,6 +81,7 @@ class Report extends Component {
             rows[rows.length] = `${deviation.label} - totalt ${deviationDates.length} dag(ar)`
             rows[rows.length] = endTableHeader
           rows[rows.length] = endTableRow
+          // eslint-disable-next-line
           deviationDates.map((date, index) => {
             rows[rows.length] = startTableRow
               rows[rows.length] = '<td colspan="3" style="text-align: left;">'
