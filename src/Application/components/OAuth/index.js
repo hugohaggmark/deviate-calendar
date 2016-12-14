@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import * as actions from '../../actions'
 
 class OAuth extends Component {
   render() {
@@ -16,5 +17,5 @@ class OAuth extends Component {
 export default connect(state => ({
 
 }), dispatch => ({
-  authenticate: payload => dispatch({type:'Authenticated', payload: payload})
+  authenticate: payload => dispatch(actions.authenticatedAction(payload))
 }))(OAuth)

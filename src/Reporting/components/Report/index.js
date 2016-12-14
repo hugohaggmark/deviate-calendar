@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getformattedDate, getDatesInArrayForThisYearMonth} from '../../../dateHelper'
-import {gmail} from '../../../Application'
+import {gmail, actions} from '../../../Application'
 import './style.css'
 
 class Report extends Component {
@@ -181,6 +181,6 @@ state =>({
   calendar : state.calendar,
   info : state.info,
 }), dispatch => ({
-  showSpinner: () => dispatch({type:'ShowSpinner'}),
-  hideSpinner: () => dispatch({type:'HideSpinner'})
+  showSpinner: () => dispatch(actions.showSpinnerAction()),
+  hideSpinner: () => dispatch(actions.hideSpinnerAction())
 }))(Report)

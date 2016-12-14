@@ -5,7 +5,7 @@
     "label": "VAB",
     "showInReport": true,
     "style": {
-      "background-color": "#7986cb"
+      "backgroundColor": "#7986cb"
     }
   }, {
     "id": 2,
@@ -13,7 +13,7 @@
     "label": "Föräldraledig",
     "showInReport": true,
     "style": {
-      "background-color": "#6c78b6"
+      "backgroundColor": "#6c78b6"
     }
   }, {
     "id": 3,
@@ -21,7 +21,7 @@
     "label": "Sjuk",
     "showInReport": true,
     "style": {
-      "background-color": "#90a4ae"
+      "backgroundColor": "#90a4ae"
     }
   }, {
     "id": 4,
@@ -29,7 +29,7 @@
     "label": "Aptitud",
     "showInReport": false,
     "style": {
-      "background-color": "#7986cb"
+      "backgroundColor": "#7986cb"
     }
   }, {
     "id": 5,
@@ -37,7 +37,7 @@
     "label": "Semester",
     "showInReport": true,
     "style": {
-      "background-color": "#81c784"
+      "backgroundColor": "#81c784"
     }
   }, {
     "id": 6,
@@ -45,7 +45,7 @@
     "label": "Helgdag",
     "showInReport": false,
     "style": {
-      "background-color": "#ff9fad"
+      "backgroundColor": "#ff9fad"
     }
   }, {
     "id": 7,
@@ -53,7 +53,7 @@
     "label": "Annat",
     "showInReport": false,
     "style": {
-      "background-color": "#7986cb"
+      "backgroundColor": "#7986cb"
     }
   }]
 }

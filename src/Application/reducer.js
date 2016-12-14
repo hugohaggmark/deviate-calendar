@@ -1,4 +1,5 @@
 import {setCookie, getCookie} from './cookie'
+import * as constants from './constants'
 
 const parseHash = (hash) => {
   if (!hash)
@@ -16,20 +17,20 @@ const parseHash = (hash) => {
 
 const ApplicationReducer = (state = {showSpinner:false}, action = {}) => {
   switch (action.type) {
-    case 'Authorize':
+    case constants.AUTHORIZE:
       const token = getCookie('deviate-calendar')
       if(!token) {
         return {...state}
       }
       return {...state, id:token}
-    case 'Authenticated':
+    case constants.AUTHENTICATED:
       const google = parseHash(action.payload)
       setCookie('deviate-calendar', google.access_token, parseInt(google.expires, 10))
       window.location.href = '/'
       return {...state, id:google.access_token}
-    case 'ShowSpinner':
+    case constants.SHOWSPINNER:
       return {...state, showSpinner:true}
-    case 'HideSpinner':
+    case constants.HIDESPINNER:
       return {...state, showSpinner:false}
     default:
       return {...state}

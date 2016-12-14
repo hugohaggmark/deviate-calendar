@@ -13,6 +13,7 @@ import { reducer as InformationReducer } from './Information'
 import { reducer as ApplicationReducer } from './Application'
 import App from './App';
 import { actions as calendarActions } from './Calendar'
+import { actions as ApplicationActions} from './Application'
 import { State, Login, OAuth, Settings } from './Application'
 import './index.css'
 
@@ -32,7 +33,7 @@ const store = createStore(reducer, {}, enhancer);
 const history = syncHistoryWithStore(browserHistory, store)
 
 try {
-  store.dispatch({type:'Authorize'})
+  store.dispatch(ApplicationActions.authorizeAction())
   store.dispatch(calendarActions.loadDatesAction(new Date()))
 } catch(err) {
   console.log(err.message)
