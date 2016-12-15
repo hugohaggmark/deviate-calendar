@@ -22,6 +22,9 @@ class App extends Component {
     this.setState({
       showReport: !this.state.showReport
     })
+    if (this.state.showReport) {
+      document.body.scrollIntoView()
+    }
   }
   render() {
     const {showSpinner} = this.props
@@ -43,7 +46,7 @@ class App extends Component {
                 {showInfo && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
               </div>
               {showInfo &&
-                <Info />
+                <Info/>
               }
             </div>
           </div>
@@ -56,7 +59,7 @@ class App extends Component {
                 {showReport && <span className="pull-right"><i className="glyphicon glyphicon-chevron-down"></i></span>}
               </div>
               {showReport &&
-                <Report />
+                <Report/>
               }
             </div>
           </div>

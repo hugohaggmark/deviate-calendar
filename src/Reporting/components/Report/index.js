@@ -5,6 +5,9 @@ import {gmail} from '../../../Application'
 import './style.css'
 
 class Report extends Component {
+  componentDidMount() {
+    document.getElementById("report").scrollIntoView()
+  }
   createHtmlReport = (calendar, info, showInReportDeviations) => {
     const year = calendar.date.getFullYear()
     const month = calendar.date.getMonth()
@@ -114,7 +117,7 @@ class Report extends Component {
     const subject = `Tidrapport perioden ${calendar.formattedStartDate} -> ${calendar.formattedEndDate}`
     const htmlReport = this.createHtmlReport(calendar, info, showInReportDeviations)
     return (
-      <div className="col-xs-12 box">
+      <div id="report" className="col-xs-12 box">
         <div className="table-responsive">
           <table className="table table-borderless table-condensed">
             <tbody>

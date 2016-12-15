@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import * as actions from '../../actions'
 
 class Info extends Component{
+  componentDidMount() {
+    document.getElementById("info").scrollIntoView()
+  }
   render(){
     const {colleague,
       customer,
@@ -18,7 +21,7 @@ class Info extends Component{
       emailChanged,
     } = this.props
     return(
-      <div className="col-xs-12 box">
+      <div id="info" className="col-xs-12 box">
         <div className="form-group col-xs-12 col-sm-12 col-md-6">
           <label htmlFor="colleague">Kollega</label>
           <input type="text" defaultValue={colleague} id="colleague" className="form-control" onChange={colleagueChanged}/>
