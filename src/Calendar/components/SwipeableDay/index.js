@@ -55,7 +55,7 @@ class SwipeableDay extends Component{
     const startSlide = this.getStartSlide(payload, deviations)
     const deviation = this.getDeviation(payload, deviations)
     return (
-      <li className={this.getClassName(deviation)}>
+      <li className={this.getClassName(deviation)} onClick={() => this.updateDeviation(0, payload, deviations, reportDeviation, clearDeviation)}>
         <ReactSwipe className="carousel" swipeOptions={
           {
             continuous: true,
