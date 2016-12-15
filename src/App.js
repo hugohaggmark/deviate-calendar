@@ -27,7 +27,7 @@ class App extends Component {
     }
   }
   render() {
-    const {showSpinner} = this.props
+    const {showSpinner, info} = this.props
     const showReport = this.state.showReport
     const showInfo = this.state.showInfo
     return (
@@ -64,11 +64,13 @@ class App extends Component {
             </div>
           </div>
         </div>
+        <input id="welcome" type="hidden" value={info.colleague}/>
       </div>
     )
   }
 }
 
 export default connect(state =>({
+  info: state.info,
   showSpinner: state.application.showSpinner
 }))(App)

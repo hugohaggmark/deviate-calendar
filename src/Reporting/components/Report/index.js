@@ -104,9 +104,9 @@ class Report extends Component {
 
     return html
   }
-  sendEmail = (showSpinner, hideSpinner, email, subject, htmlReport) => {
+  sendEmail = (showSpinner, hideSpinner, email, subject, htmlReport, colleague) => {
     showSpinner()
-    gmail.sendMessage(hideSpinner, email, subject, htmlReport)
+    gmail.sendMessage(hideSpinner, email, subject, htmlReport, colleague)
   }
   render() {
     const {calendar, info, showSpinner, hideSpinner} = this.props
@@ -151,7 +151,6 @@ class Report extends Component {
                     return null
                   }
                   const deviationDates = getDatesInArrayForThisYearMonth(year, month, array)
-                  console.log('deviationDates', deviationDates);
                   if(deviationDates && deviationDates.length > 0) {
                     return ([
                       <tr key={property + '-header-' + index}>
@@ -174,7 +173,7 @@ class Report extends Component {
         </div>
         <div className="col-xs-12">
           {info && info.email &&
-            <input type="button" className="margin-bottom btn btn-primary" value={`Skicka tidrapport`} onClick={() => this.sendEmail(showSpinner, hideSpinner, info.email, subject, htmlReport)}/>
+            <input type="button" className="margin-bottom btn btn-primary" value={`Skicka tidrapport`} onClick={() => this.sendEmail(showSpinner, hideSpinner, info.email, subject, htmlReport, info.colleague)}/>
           }
         </div>
       </div>

@@ -16,6 +16,7 @@ import { actions as calendarActions } from './Calendar'
 import { State, Login, OAuth } from './Application'
 import './index.css'
 
+const mount = document.getElementById('mount')
 const routingMiddleware = routerMiddleware(browserHistory)
 const middleware = applyMiddleware(routingMiddleware, createLogger())
 const enhancer = compose(
@@ -56,7 +57,7 @@ ReactDOM.render(
       <Route path="state" component={State}/>
     </Router>
   </Provider>,
-  document.getElementById('mount')
+  mount
 );
 
 export default store
