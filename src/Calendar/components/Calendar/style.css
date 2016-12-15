@@ -58,5 +58,6 @@ ul.weekdays {
   .days>li {
     border-left: 1px solid #c2c2c2;
     border-right: 1px solid #c2c2c2;
+    line-height: 60px;
   }
 }
