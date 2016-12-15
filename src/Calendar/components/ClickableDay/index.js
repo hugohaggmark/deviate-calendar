@@ -16,9 +16,9 @@ class ClickableDay extends Component{
     return (
       <li className="col-sm-1 work-day">
         <div className="dropdown col-sm-12">
-          <span id={'day-' + index} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <div id={'day-' + index} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             {this.pad(value.getDate())}
-          </span>
+          </div>
           <ul className="dropdown-menu" id={'dropdown-menu-' + index } aria-labelledby={'day-' + index}>
             <li className="dropdown-header">Avvikelser</li>
             {deviations &&
