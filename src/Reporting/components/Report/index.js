@@ -101,7 +101,7 @@ class Report extends Component {
       html += rows[i]
     }
     html += "</tbody><table>"
-    html += '<br/><a href="https://deviate-calendar.herokuapp.com/">Skickat med deviate-calendar</a>'
+    html += '<br/>Skickat med <a href="https://deviate-calendar.herokuapp.com/">deviate-calendar</a>'
 
     return html
   }
