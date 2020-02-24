@@ -10,8 +10,7 @@ export default class Login extends Component {
     const clientid = settings.clientId
     const href = `${authuri}?scope=${scopes}&redirect_uri=${redirect}&response_type=token&client_id=${clientid}`
     return (
-      <ReactRedirect location={href}>
-      </ReactRedirect>
+      <ReactRedirect location={href}></ReactRedirect>
     )
   }
 }
