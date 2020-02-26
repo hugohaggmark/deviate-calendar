@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/deviate-calendar/static/css/main.72114ebf.chunk.css",
+    "main.js": "/deviate-calendar/static/js/main.c2d4789e.chunk.js",
+    "main.js.map": "/deviate-calendar/static/js/main.c2d4789e.chunk.js.map",
+    "runtime-main.js": "/deviate-calendar/static/js/runtime-main.096fd985.js",
+    "runtime-main.js.map": "/deviate-calendar/static/js/runtime-main.096fd985.js.map",
+    "static/css/2.411ae3b8.chunk.css": "/deviate-calendar/static/css/2.411ae3b8.chunk.css",
+    "static/js/2.0f45996f.chunk.js": "/deviate-calendar/static/js/2.0f45996f.chunk.js",
+    "static/js/2.0f45996f.chunk.js.map": "/deviate-calendar/static/js/2.0f45996f.chunk.js.map",
+    "index.html": "/deviate-calendar/index.html",
+    "precache-manifest.db928be5565e2ecc9a34be6b7a0337ad.js": "/deviate-calendar/precache-manifest.db928be5565e2ecc9a34be6b7a0337ad.js",
+    "service-worker.js": "/deviate-calendar/service-worker.js",
+    "static/css/2.411ae3b8.chunk.css.map": "/deviate-calendar/static/css/2.411ae3b8.chunk.css.map",
+    "static/css/main.72114ebf.chunk.css.map": "/deviate-calendar/static/css/main.72114ebf.chunk.css.map",
+    "static/js/2.0f45996f.chunk.js.LICENSE.txt": "/deviate-calendar/static/js/2.0f45996f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.096fd985.js",
+    "static/css/2.411ae3b8.chunk.css",
+    "static/js/2.0f45996f.chunk.js",
+    "static/css/main.72114ebf.chunk.css",
+    "static/js/main.c2d4789e.chunk.js"
+  ]
+}
