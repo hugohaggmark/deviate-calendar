@@ -9,6 +9,7 @@
   "dependencies": {
     "MimeJS": "git+https://github.com/ikr0m/mime-js.git",
     "es6-promise": "^4.0.5",
+    "gh-pages": "^2.2.0",
     "isomorphic-fetch": "^2.2.1",
     "mimemessage": "^1.0.4",
     "react": "^15.3.2",
@@ -26,6 +27,8 @@
     "swipe-js-iso": "^2.0.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://hugohaggmark.github.io/deviate-calendar"
 }
