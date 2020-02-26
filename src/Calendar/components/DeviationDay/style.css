@@ -1,4 +1,10 @@
-.vab-day, .sick-day, .vacay-day, .aptitud-day, .parental-leave-day, .holiday-day, .other-day {
+.vab-day,
+.sick-day,
+.vacay-day,
+.aptitud-day,
+.parental-leave-day,
+.holiday-day,
+.other-day {
   font-size: 80%;
   color: #ffffff;
 }
@@ -24,7 +30,7 @@
 }
 
 .other-day {
-  background-image: url('/img/annat.jpg');
+  background-image: url("./img/annat.jpg");
   background-repeat: no-repeat;
   background-position: center;
   text-indent: 100%;
@@ -34,7 +40,7 @@
 }
 
 .aptitud-day {
-  background-image: url('/img/aptitudlogo.png');
+  background-image: url("./img/aptitudlogo.png");
   background-repeat: no-repeat;
   background-position: center;
   text-indent: 100%;
